@@ -60,10 +60,12 @@ export const Navbar: React.FC = () => {
           </div>
 
           {/* Brand Logo */}
-          <Link href="/" className="text-center group">
-            <span className="font-serif text-xl md:text-2xl tracking-[0.2em] font-normal uppercase text-near-black block group-hover:opacity-80 transition-opacity">
-              {siteConfig.name}
-            </span>
+          <Link href="/" className="text-center group flex items-center justify-center">
+            <img
+              src="/logo.png"
+              alt={siteConfig.name}
+              className="h-10 md:h-12 w-auto object-contain transition-opacity group-hover:opacity-85 max-w-[220px]"
+            />
           </Link>
 
           {/* Right Actions */}
@@ -116,7 +118,7 @@ export const Navbar: React.FC = () => {
             >
               <div>
                 <div className="flex justify-between items-center pb-8 border-b border-cream-200">
-                  <span className="font-serif text-lg tracking-widest">{siteConfig.name}</span>
+                  <img src="/logo.png" alt={siteConfig.name} className="h-8 w-auto object-contain" />
                   <button onClick={() => setMobileMenuOpen(false)} aria-label="Close menu">
                     <X className="w-5 h-5 text-editorial-muted" />
                   </button>

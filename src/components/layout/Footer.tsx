@@ -122,7 +122,10 @@ export const Footer: React.FC = () => {
 
         {/* Copyright */}
         <div className="pt-8 border-t border-cream-100/10 flex flex-col md:flex-row justify-between items-center text-[11px] font-mono tracking-widest text-cream-400/60 gap-4">
-          <p>&copy; {new Date().getFullYear()} {siteConfig.name}. All rights reserved.</p>
+          <div className="flex items-center gap-4">
+            <img src="/logo.png" alt={siteConfig.name} className="h-6 w-auto object-contain brightness-200 invert" />
+            <p>&copy; {new Date().getFullYear()} {siteConfig.name}. All rights reserved.</p>
+          </div>
           <div className="flex gap-6">
             <span className="hover:text-cream-100 cursor-pointer">Privacy Policy</span>
             <span className="hover:text-cream-100 cursor-pointer">Terms of Service</span>
