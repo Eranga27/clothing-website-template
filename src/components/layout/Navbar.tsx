@@ -31,16 +31,16 @@ export const Navbar: React.FC = () => {
       <header
         className={`sticky top-0 z-40 w-full transition-all duration-500 ease-editorial ${
           isScrolled
-            ? 'bg-cream-100/95 backdrop-blur-md shadow-xs border-b border-cream-200/80 py-3.5'
-            : 'bg-cream-100 py-5 border-b border-cream-200/40'
+            ? 'bg-cream-100/95 backdrop-blur-md shadow-xs border-b border-cream-200/80 py-3'
+            : 'bg-cream-100 py-4 md:py-5 border-b border-cream-200/40'
         }`}
       >
-        <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between relative min-h-[44px]">
           {/* Mobile Menu Trigger & Left Links */}
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-6 z-10">
             <button
               onClick={() => setMobileMenuOpen(true)}
-              className="md:hidden text-near-black p-1"
+              className="md:hidden text-near-black p-1 hover:opacity-75 transition-opacity"
               aria-label="Open mobile menu"
             >
               <Menu className="w-5 h-5 stroke-[1.2]" />
@@ -59,39 +59,42 @@ export const Navbar: React.FC = () => {
             </nav>
           </div>
 
-          {/* Brand Logo */}
-          <Link href="/" className="text-center group flex items-center justify-center">
+          {/* Brand Logo - Perfectly Centered */}
+          <Link
+            href="/"
+            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-center group flex items-center justify-center z-20"
+          >
             <img
               src="/logo.png"
               alt={siteConfig.name}
-              className="h-10 md:h-12 w-auto object-contain transition-opacity group-hover:opacity-85 max-w-[220px]"
+              className="h-9 md:h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105 max-w-[200px]"
             />
           </Link>
 
           {/* Right Actions */}
-          <div className="flex items-center gap-5 md:gap-8 text-xs font-mono tracking-widest uppercase">
+          <div className="flex items-center gap-5 md:gap-8 text-xs font-mono tracking-widest uppercase z-10">
             <Link
               href="/about"
-              className="hidden lg:block text-editorial-muted hover:text-near-black transition-colors"
+              className="hidden lg:block text-editorial-muted hover:text-near-black transition-colors py-1 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-near-black hover:after:w-full after:transition-all after:duration-300"
             >
               About
             </Link>
 
             <button
               onClick={() => setSearchOpen(true)}
-              className="text-editorial-muted hover:text-near-black transition-colors flex items-center gap-2 p-1"
+              className="text-editorial-muted hover:text-near-black transition-colors flex items-center gap-2 p-1 group"
               aria-label="Search items"
             >
-              <Search className="w-4 h-4 stroke-[1.5]" />
+              <Search className="w-4 h-4 stroke-[1.5] group-hover:scale-110 transition-transform" />
               <span className="hidden sm:inline text-[11px]">Search</span>
             </button>
 
             <button
               onClick={openCart}
-              className="flex items-center gap-2 text-near-black hover:opacity-80 transition-opacity p-1 relative"
+              className="flex items-center gap-2 text-near-black hover:opacity-80 transition-all p-1 relative group"
               aria-label="Open Shopping Bag"
             >
-              <ShoppingBag className="w-4 h-4 stroke-[1.5]" />
+              <ShoppingBag className="w-4 h-4 stroke-[1.5] group-hover:scale-110 transition-transform" />
               <span className="text-[11px] font-mono font-semibold">({totalItems})</span>
             </button>
           </div>
@@ -120,7 +123,7 @@ export const Navbar: React.FC = () => {
                 <div className="flex justify-between items-center pb-8 border-b border-cream-200">
                   <img src="/logo.png" alt={siteConfig.name} className="h-8 w-auto object-contain" />
                   <button onClick={() => setMobileMenuOpen(false)} aria-label="Close menu">
-                    <X className="w-5 h-5 text-editorial-muted" />
+                    <X className="w-5 h-5 text-editorial-muted hover:text-near-black transition-colors" />
                   </button>
                 </div>
                 <nav className="flex flex-col gap-6 py-8">
@@ -152,7 +155,7 @@ export const Navbar: React.FC = () => {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            className="fixed inset-0 z-50 bg-cream-100/98 p-6 md:p-12 flex flex-col justify-start"
+            className="fixed inset-0 z-50 bg-cream-100/98 p-6 md:p-12 flex flex-col justify-start backdrop-blur-md"
           >
             <div className="max-w-4xl mx-auto w-full pt-12">
               <div className="flex justify-between items-center mb-8">

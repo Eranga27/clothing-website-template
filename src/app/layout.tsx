@@ -7,6 +7,8 @@ import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
 import { CartDrawer } from '@/components/layout/CartDrawer';
 import { Toast } from '@/components/ui/Toast';
+import { Preloader } from '@/components/ui/Preloader';
+import { PageTransition } from '@/components/ui/PageTransition';
 
 export const metadata: Metadata = {
   title: {
@@ -33,9 +35,12 @@ export default function RootLayout({
     <html lang="en" className="scroll-smooth">
       <body className="bg-cream-100 text-near-black antialiased selection:bg-near-black selection:text-cream-100 min-h-screen flex flex-col justify-between">
         <CartProvider>
+          <Preloader />
           <AnnouncementBar />
           <Navbar />
-          <div className="flex-1">{children}</div>
+          <div className="flex-1">
+            <PageTransition>{children}</PageTransition>
+          </div>
           <Footer />
           <CartDrawer />
           <Toast />
