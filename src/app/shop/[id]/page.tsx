@@ -12,6 +12,12 @@ import { useCart } from '@/context/CartContext';
 import { ScrollReveal } from '@/components/ui/ScrollReveal';
 import { ProductCard } from '@/components/shop/ProductCard';
 
+export function generateStaticParams() {
+  return products.map((product) => ({
+    id: product.id,
+  }));
+}
+
 export default function ProductDetailPage() {
   const params = useParams();
   const router = useRouter();
