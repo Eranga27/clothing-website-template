@@ -35,11 +35,11 @@ export const products: Product[] = [
     isNew: true,
     isFeatured: true,
     images: [
-      "https://images.unsplash.com/photo-1544441893-675973e31985?q=80&w=1200&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=1200&auto=format&fit=crop",
+      "/apparel1.jpg",
+      "/apparel4.jpg",
       "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?q=80&w=1200&auto=format&fit=crop"
     ],
-    hoverImage: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=1200&auto=format&fit=crop",
+    hoverImage: "/apparel4.jpg",
     description: "Sculpted with exaggerated peak lapels and a relaxed columnar silhouette. Cut from dense Italian organic gabardine with horn button closures and a removable waist sash.",
     details: [
       "Water-repellent organic cotton gabardine",
@@ -98,10 +98,10 @@ export const products: Product[] = [
     isNew: true,
     isFeatured: true,
     images: [
-      "https://images.unsplash.com/photo-1509631179647-0177331693ae?q=80&w=1200&auto=format&fit=crop",
+      "/apparel4.jpg",
       "https://images.unsplash.com/photo-1584273143981-41c073dfe8f8?q=80&w=1200&auto=format&fit=crop"
     ],
-    hoverImage: "https://images.unsplash.com/photo-1584273143981-41c073dfe8f8?q=80&w=1200&auto=format&fit=crop",
+    hoverImage: "/apparel4.jpg",
     description: "High-waisted trousers with twin forward pleats that cascade into a wide, straight leg. Engineered with a crisp crease that holds its form all day.",
     details: [
       "Extended tab waistband with horn buttons",
@@ -129,10 +129,10 @@ export const products: Product[] = [
     isNew: false,
     isFeatured: true,
     images: [
-      "https://images.unsplash.com/photo-1434389677669-e08b4cac3105?q=80&w=1200&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1576995853123-5a10305d93c0?q=80&w=1200&auto=format&fit=crop"
+      "/apparel3.jpg",
+      "/apparel2.jpg"
     ],
-    hoverImage: "https://images.unsplash.com/photo-1576995853123-5a10305d93c0?q=80&w=1200&auto=format&fit=crop",
+    hoverImage: "/apparel2.jpg",
     description: "A weightless second-skin knit crafted on 3D seamless looms. Combines the sheen of mulberry silk with the soft thermal insulation of extra-fine merino wool.",
     details: [
       "Fully seamless 3D knit technology",
@@ -218,24 +218,33 @@ export const featuredCollections = [
     id: "col-01",
     title: "Collection 04 — Modern Form",
     subtitle: "Structured tailoring and quiet outerwear crafted from heavy Italian wool and raw organic gabardine.",
-    image: "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=1200&auto=format&fit=crop",
+    image: "/apparel4.jpg",
     href: "/shop?collection=04",
-    gridSpan: "col-span-12 md:col-span-7",
+    gridSpan: "col-span-12 lg:col-span-7",
   },
   {
     id: "col-02",
-    title: "Tactile Knitwear",
-    subtitle: "Seamless Mongolian cashmere and silk-merino layers.",
-    image: "https://images.unsplash.com/photo-1434389677669-e08b4cac3105?q=80&w=1200&auto=format&fit=crop",
+    title: "Everyday Essentials",
+    subtitle: "Clean-cut knitwear and premium basics in seamless organic cotton blends.",
+    image: "/apparel3.jpg",
     href: "/shop?category=knitwear",
-    gridSpan: "col-span-12 md:col-span-5",
+    gridSpan: "col-span-12 lg:col-span-5",
   },
   {
     id: "col-03",
-    title: "Atelier Leather Goods",
-    subtitle: "Architectural carryware hand-finished in Florence.",
-    image: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?q=80&w=1200&auto=format&fit=crop",
+    title: "The Atelier Edit",
+    subtitle: "Curated pieces from the newest seasonal drop, worn and styled as intended.",
+    image: "/apparel1.jpg",
+    href: "/shop?category=outerwear",
+    gridSpan: "col-span-12 lg:col-span-5",
+  },
+  {
+    id: "col-04",
+    title: "Archive & Atelier",
+    subtitle: "Architectural carryware and editorial wardrobe selections hand-finished in our Paris studio.",
+    image: "/apparel2.jpg",
     href: "/shop?category=accessories",
-    gridSpan: "col-span-12 md:col-span-12",
+    gridSpan: "col-span-12 lg:col-span-7",
   }
 ];
+
