@@ -34,3 +34,5 @@ next-env.d.ts
 
 # raw media uncompressed source
 /media/*.mp4
+
+.vercel
