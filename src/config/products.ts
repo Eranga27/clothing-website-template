@@ -1,8 +1,7 @@
 /**
  * Product Data Configuration
  * 
- * Edit this single file to update products, prices, images, colors, sizes, and specs.
- * The website UI updates automatically without touching layout code.
+ * Eranga's Clothing Store — Product Catalog
  */
 
 export interface Product {
@@ -36,10 +35,10 @@ export const products: Product[] = [
     isFeatured: true,
     images: [
       "/apparel1.jpg",
-      "/apparel4.jpg",
-      "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?q=80&w=1200&auto=format&fit=crop"
+      "/apparel5.jpg",
+      "/apparel4.jpg"
     ],
-    hoverImage: "/apparel4.jpg",
+    hoverImage: "/apparel5.jpg",
     description: "Sculpted with exaggerated peak lapels and a relaxed columnar silhouette. Cut from dense Italian organic gabardine with horn button closures and a removable waist sash.",
     details: [
       "Water-repellent organic cotton gabardine",
@@ -64,14 +63,14 @@ export const products: Product[] = [
     subtitle: "Mongolian Raw Cashmere",
     price: 1450,
     category: "outerwear",
-    isNew: false,
+    isNew: true,
     isFeatured: true,
     images: [
-      "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?q=80&w=1200&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1509631179647-0177331693ae?q=80&w=1200&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1550614000-4895a10e1bfd?q=80&w=1200&auto=format&fit=crop"
+      "/apparel7.jpg",
+      "/apparel2.jpg",
+      "https://images.unsplash.com/photo-1509631179647-0177331693ae?q=80&w=1200&auto=format&fit=crop"
     ],
-    hoverImage: "https://images.unsplash.com/photo-1509631179647-0177331693ae?q=80&w=1200&auto=format&fit=crop",
+    hoverImage: "/apparel2.jpg",
     description: "An enveloping coat formed from double-faced brushed cashmere. Features raglan sleeves, seamless collar roll, and hidden magnet closure for minimal purity.",
     details: [
       "Double-face unlined construction",
@@ -98,8 +97,8 @@ export const products: Product[] = [
     isNew: true,
     isFeatured: true,
     images: [
-      "/apparel4.jpg",
-      "https://images.unsplash.com/photo-1584273143981-41c073dfe8f8?q=80&w=1200&auto=format&fit=crop"
+      "/apparel8.jpg",
+      "/apparel4.jpg"
     ],
     hoverImage: "/apparel4.jpg",
     description: "High-waisted trousers with twin forward pleats that cascade into a wide, straight leg. Engineered with a crisp crease that holds its form all day.",
@@ -130,9 +129,9 @@ export const products: Product[] = [
     isFeatured: true,
     images: [
       "/apparel3.jpg",
-      "/apparel2.jpg"
+      "/apparel6.jpg"
     ],
-    hoverImage: "/apparel2.jpg",
+    hoverImage: "/apparel6.jpg",
     description: "A weightless second-skin knit crafted on 3D seamless looms. Combines the sheen of mulberry silk with the soft thermal insulation of extra-fine merino wool.",
     details: [
       "Fully seamless 3D knit technology",
@@ -160,10 +159,10 @@ export const products: Product[] = [
     isNew: true,
     isFeatured: true,
     images: [
-      "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=1200&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?q=80&w=1200&auto=format&fit=crop"
+      "/apparel6.jpg",
+      "/apparel1.jpg"
     ],
-    hoverImage: "https://images.unsplash.com/photo-1544441893-675973e31985?q=80&w=1200&auto=format&fit=crop",
+    hoverImage: "/apparel1.jpg",
     description: "Fluid column dress cut on the bias with a soft cowl neck and asymmetric back drape. Crafted from matte sandwashed silk charmeuse that glides against the skin.",
     details: [
       "Bias-cut construction for natural body mold",
@@ -183,32 +182,62 @@ export const products: Product[] = [
   },
   {
     id: "v-06",
-    name: "Sculpted Nappa Leather Tote",
-    subtitle: "Full-Grain Italian Calfskin",
-    price: 920,
-    category: "accessories",
-    isNew: false,
+    name: "Sculpted Oversized Wool Blazer",
+    subtitle: "Double-Faced Biella Wool",
+    price: 980,
+    category: "tailoring",
+    isNew: true,
+    isFeatured: true,
+    images: [
+      "/apparel5.jpg",
+      "/apparel7.jpg"
+    ],
+    hoverImage: "/apparel7.jpg",
+    description: "An architectural single-breasted blazer cut from heavy Biella wool gabardine with structured drop shoulders and clean welted flap pockets.",
+    details: [
+      "Drop shoulder relaxed tailored silhouette",
+      "Horn button single-breasted closure",
+      "Cupro lined interior",
+      "Dual rear vent slits"
+    ],
+    fabric: "100% Italian Double-Faced Virgin Wool",
+    fit: "Relaxed tailored fit.",
+    care: "Dry clean only.",
+    colors: [
+      { name: "Charcoal Slate", hex: "#2B2D2F" },
+      { name: "Oatmeal", hex: "#E4DFD7" }
+    ],
+    sizes: ["S", "M", "L"],
+    inStock: true
+  },
+  {
+    id: "v-07",
+    name: "Minimalist High-Collar Silk Tunic",
+    subtitle: "Raw Organic Silk Crepe",
+    price: 640,
+    category: "dresses",
+    isNew: true,
     isFeatured: false,
     images: [
-      "https://images.unsplash.com/photo-1584917865442-de89df76afd3?q=80&w=1200&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1590874103328-eac38a683ce7?q=80&w=1200&auto=format&fit=crop"
+      "/apparel8.jpg",
+      "/apparel3.jpg"
     ],
-    hoverImage: "https://images.unsplash.com/photo-1590874103328-eac38a683ce7?q=80&w=1200&auto=format&fit=crop",
-    description: "An unlined structural tote cut from single-piece full grain nappa leather. Features hand-burnished edges, internal zip pouch, and soft magnetic bridge closure.",
+    hoverImage: "/apparel3.jpg",
+    description: "Columnar tunic blouse cut from heavy raw silk with a high standing neck roll, hidden placket, and exaggerated split side cuffs.",
     details: [
-      "Single-piece seamless base construction",
-      "Removable interior canvas zippered pouch",
-      "Embossed serial number tag",
-      "Protective brass feet"
+      "Standing mandarin neck collar",
+      "Concealed mother-of-pearl buttons",
+      "Extended side seam splits",
+      "French bound inner seams"
     ],
-    fabric: "100% Full-Grain Italian Calfskin Leather",
-    fit: "Dimensions: 42cm W x 34cm H x 18cm D",
-    care: "Wipe with soft damp cloth. Condition periodically with natural leather balm.",
+    fabric: "100% Raw Mulberry Silk Crepe",
+    fit: "Straight columnar drape.",
+    care: "Dry clean only.",
     colors: [
-      { name: "Espresso", hex: "#2A1E17" },
-      { name: "Butter", hex: "#EAE1CF" }
+      { name: "Ivory", hex: "#FAF8F5" },
+      { name: "Obsidian", hex: "#121212" }
     ],
-    sizes: ["One Size"],
+    sizes: ["XS", "S", "M", "L"],
     inStock: true
   }
 ];
@@ -218,7 +247,7 @@ export const featuredCollections = [
     id: "col-01",
     title: "Collection 04 — Modern Form",
     subtitle: "Structured tailoring and quiet outerwear crafted from heavy Italian wool and raw organic gabardine.",
-    image: "/apparel4.jpg",
+    image: "/apparel5.jpg",
     href: "/shop?collection=04",
     gridSpan: "col-span-12 lg:col-span-7",
   },
@@ -226,7 +255,7 @@ export const featuredCollections = [
     id: "col-02",
     title: "Everyday Essentials",
     subtitle: "Clean-cut knitwear and premium basics in seamless organic cotton blends.",
-    image: "/apparel3.jpg",
+    image: "/apparel6.jpg",
     href: "/shop?category=knitwear",
     gridSpan: "col-span-12 lg:col-span-5",
   },
@@ -234,17 +263,16 @@ export const featuredCollections = [
     id: "col-03",
     title: "The Atelier Edit",
     subtitle: "Curated pieces from the newest seasonal drop, worn and styled as intended.",
-    image: "/apparel1.jpg",
+    image: "/apparel7.jpg",
     href: "/shop?category=outerwear",
     gridSpan: "col-span-12 lg:col-span-5",
   },
   {
     id: "col-04",
-    title: "Archive & Atelier",
-    subtitle: "Architectural carryware and editorial wardrobe selections hand-finished in our Paris studio.",
-    image: "/apparel2.jpg",
+    title: "Archive & Collection",
+    subtitle: "Architectural carryware and editorial wardrobe selections hand-finished in our Colombo & Melbourne studios.",
+    image: "/apparel8.jpg",
     href: "/shop?category=accessories",
     gridSpan: "col-span-12 lg:col-span-7",
   }
 ];
-

@@ -24,15 +24,17 @@ const marqueeItems = [
 
 const galleryImages = [
   "/apparel1.jpg",
+  "/apparel5.jpg",
   "/apparel2.jpg",
+  "/apparel6.jpg",
   "/apparel3.jpg",
+  "/apparel7.jpg",
   "/apparel4.jpg",
+  "/apparel8.jpg",
   "/media/featured-1.png",
   "/media/featured-2.png",
   "/media/featured-3.png",
   "/media/featured-4.png",
-  "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?q=80&w=800&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=800&auto=format&fit=crop",
 ];
 
 export default function HomePage() {
