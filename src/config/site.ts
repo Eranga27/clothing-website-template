@@ -1,8 +1,7 @@
 /**
  * Client & Brand Configuration
  * 
- * Edit these values to rebrand or customize the store header, currency, contact details, 
- * taglines, and brand philosophy without modifying code structure.
+ * Eranga's Clothing Store — Sri Lanka & Australia
  */
 
 export interface SiteConfig {
@@ -27,18 +26,18 @@ export interface SiteConfig {
 }
 
 export const siteConfig: SiteConfig = {
-  // Brand Name - Replace with your client's name or brand identity
-  name: "ATELIER VÉRONIQUE",
-  tagline: "Quiet Elegance & Architectural Form",
-  description: "Modern editorial minimalism crafted with tactile Italian wool, organic silks, and deliberate geometry.",
+  // Brand Name - Eranga's Clothing Store
+  name: "Eranga's Clothing Store",
+  tagline: "Sri Lanka & Australia • Quiet Luxury & Fine Tailoring",
+  description: "Premier luxury clothing store serving Sri Lanka and Australia. Crafted with tactile Italian wool, organic silks, and deliberate geometry.",
   
   currency: {
-    code: "USD",
+    code: "AUD",
     symbol: "$",
-    freeShippingThreshold: 350,
+    freeShippingThreshold: 150,
   },
 
-  announcement: "Complimentary global standard shipping on orders over $350",
+  announcement: "Complimentary express shipping across Sri Lanka & Australia on orders over $150 AUD",
 
   navigation: [
     { name: "Shop All", href: "/shop" },
@@ -52,13 +51,13 @@ export const siteConfig: SiteConfig = {
   // One-line brand philosophy (Section 2 on Home)
   philosophy: "We believe in deliberate garments—unhurried design, quiet confidence, and tactile geometry built to endure beyond seasons.",
 
-  // Sleek fashion editorial hero video & poster image
+  // Hero video & poster image
   heroVideoUrl: "/media/hero.mp4",
   heroFallbackImage: "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=2000&auto=format&fit=crop",
 
   contact: {
-    email: "concierge@atelierveronique.com",
-    address: "Rue du Faubourg Saint-Honoré, 75008 Paris",
-    instagram: "@atelier.veronique",
+    email: "concierge@erangasclothing.com",
+    address: "Gregory's Road, Colombo 07, Sri Lanka | Collins St, Melbourne VIC 3000, Australia",
+    instagram: "@erangas.clothingstore",
   },
 };

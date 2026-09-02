@@ -12,14 +12,27 @@ import { InfiniteMarquee } from '@/components/ui/InfiniteMarquee';
 import { Product } from '@/config/products';
 
 const marqueeItems = [
-  "NEW ARRIVALS",
-  "AUTUMN / WINTER 2026",
-  "ETHICALLY CRAFTED",
-  "ITALIAN GABARDINE",
+  "ERANGA'S CLOTHING STORE",
+  "SRI LANKA & AUSTRALIA",
+  "NEW ARRIVALS 2026",
+  "ITALIAN GABARDINE & CASHMERE",
   "QUIET LUXURY",
   "TAILORED SILHOUETTES",
-  "PARIS STUDIO EDIT",
-  "COMPLIMENTARY WORLDWIDE SHIPPING",
+  "COLOMBO & MELBOURNE SHOWROOMS",
+  "FREE EXPRESS SHIPPING OVER $150 AUD",
+];
+
+const galleryImages = [
+  "/apparel1.jpg",
+  "/apparel2.jpg",
+  "/apparel3.jpg",
+  "/apparel4.jpg",
+  "/media/featured-1.png",
+  "/media/featured-2.png",
+  "/media/featured-3.png",
+  "/media/featured-4.png",
+  "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?q=80&w=800&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=800&auto=format&fit=crop",
 ];
 
 export default function HomePage() {
@@ -36,10 +49,25 @@ export default function HomePage() {
       {/* Section 2: One-line brand philosophy in large serif type that reveals on scroll */}
       <PhilosophySection />
 
-      {/* Section 3: Featured collection — 2–3 large image tiles with hover zoom */}
+      {/* Gallery Marquee (scrolling opposite direction, right to left) placed directly below Philosophy */}
+      <div className="py-2 bg-cream-100 border-b border-cream-200/60 overflow-hidden">
+        <div className="text-center mb-3">
+          <span className="text-[10px] font-mono tracking-[0.3em] uppercase text-editorial-muted">
+            &mdash; GARMENT GALLERY &mdash;
+          </span>
+        </div>
+        <InfiniteMarquee
+          items={galleryImages}
+          speed={38}
+          direction="right"
+          type="images"
+        />
+      </div>
+
+      {/* Section 3: Featured collection — large image tiles with hover zoom */}
       <FeaturedCollection />
 
-      {/* Section 4: Product grid preview — 4–6 cards with image crossfade on hover */}
+      {/* Section 4: Product grid preview — cards with image crossfade on hover */}
       <ProductGridPreview onQuickView={(p) => setQuickViewProduct(p)} />
 
       {/* Section 5: Full-bleed Editorial Video Banner */}

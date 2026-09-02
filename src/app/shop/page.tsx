@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useMemo, Suspense } from 'react';
+import React, { useState, useMemo, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { products, Product } from '@/config/products';
 import { ProductCard } from '@/components/shop/ProductCard';
@@ -10,15 +10,25 @@ import { ArrowUpDown } from 'lucide-react';
 
 function ShopContent() {
   const searchParams = useSearchParams();
-  const initialCategory = searchParams.get('category') || 'all';
+  const categoryParam = searchParams.get('category');
   const searchQuery = searchParams.get('search') || '';
+
+  const initialCategory = categoryParam || 'all';
 
   const [selectedCategory, setSelectedCategory] = useState<string>(initialCategory);
   const [sortBy, setSortBy] = useState<'featured' | 'price-asc' | 'price-desc' | 'newest'>('featured');
   const [quickViewProduct, setQuickViewProduct] = useState<Product | null>(null);
 
+  // Sync category param if URL changes
+  useEffect(() => {
+    if (categoryParam) {
+      setSelectedCategory(categoryParam);
+    }
+  }, [categoryParam]);
+
   const categories = [
     { id: 'all', label: 'Shop All' },
+    { id: 'new', label: 'New Arrivals' },
     { id: 'outerwear', label: 'Outerwear' },
     { id: 'tailoring', label: 'Tailoring' },
     { id: 'knitwear', label: 'Knitwear' },
@@ -29,8 +39,10 @@ function ShopContent() {
   const filteredProducts = useMemo(() => {
     let result = [...products];
 
-    // Filter by Category
-    if (selectedCategory !== 'all') {
+    // Filter by Category or New Arrivals
+    if (selectedCategory === 'new') {
+      result = result.filter((p) => p.isNew);
+    } else if (selectedCategory !== 'all') {
       result = result.filter((p) => p.category === selectedCategory);
     }
 
@@ -64,13 +76,13 @@ function ShopContent() {
         <ScrollReveal>
           <div className="text-center max-w-2xl mx-auto mb-16">
             <span className="text-xs font-mono tracking-[0.25em] uppercase text-editorial-muted block mb-3">
-              Garments & Artifacts
+              Eranga's Clothing Store &bull; Sri Lanka & Australia
             </span>
             <h1 className="font-serif text-4xl md:text-6xl font-light text-near-black tracking-tight mb-4">
-              Atelier Catalog
+              {selectedCategory === 'new' ? 'New Arrivals' : 'Store Catalog'}
             </h1>
             <p className="text-xs md:text-sm font-sans font-light text-editorial-muted leading-relaxed">
-              Explore our permanent collection of structured coats, silk column gowns, double-faced cashmere, and fine wool gabardine.
+              Explore our permanent collection of structured trench coats, silk column gowns, double-faced cashmere, and fine wool gabardine.
             </p>
           </div>
         </ScrollReveal>
@@ -78,14 +90,14 @@ function ShopContent() {
         {/* Filter Controls & Category Bar */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-6 pb-8 mb-12 border-b border-cream-300/40">
           {/* Category Tabs */}
-          <div className="flex flex-wrap items-center justify-center md:justify-start gap-2 sm:gap-4 text-xs font-mono tracking-widest uppercase">
+          <div className="flex flex-wrap items-center justify-center md:justify-start gap-2 sm:gap-3 text-xs font-mono tracking-widest uppercase">
             {categories.map((cat) => (
               <button
                 key={cat.id}
                 onClick={() => setSelectedCategory(cat.id)}
                 className={`px-4 py-2 transition-all ${
                   selectedCategory === cat.id
-                    ? 'bg-near-black text-cream-100 shadow-sm'
+                    ? 'bg-near-black text-cream-100 shadow-sm font-semibold'
                     : 'bg-cream-200/60 text-near-black hover:bg-cream-300/60'
                 }`}
               >

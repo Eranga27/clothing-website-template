@@ -48,7 +48,7 @@ export const HeroSection: React.FC = () => {
           transition={{ duration: 1.0, delay: 0.2, ease: EDITORIAL_EASING }}
           className="text-xs md:text-sm font-mono tracking-[0.3em] uppercase text-cream-200 mb-6 block drop-shadow-sm"
         >
-          AUTUMN / WINTER COLLECTION &bull; EDIT 04
+          ERANGA'S CLOTHING STORE &bull; SRI LANKA & AUSTRALIA
         </motion.span>
 
         {/* Hero Title */}

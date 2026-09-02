@@ -24,11 +24,11 @@ export const Footer: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 pb-16 border-b border-cream-100/15">
           {/* Newsletter Column */}
           <div className="lg:col-span-6 space-y-6">
-            <span className="text-xs font-mono tracking-widest uppercase text-cream-400">
+            <span className="text-xs font-mono tracking-widest uppercase text-amber-300/80">
               The Gazette & Edit
             </span>
             <h3 className="font-serif text-2xl md:text-3xl font-light text-cream-100 leading-tight">
-              Receive private preview invitations and private atelier updates.
+              Receive private preview invitations & seasonal release edits.
             </h3>
 
             {subscribed ? (
@@ -48,7 +48,7 @@ export const Footer: React.FC = () => {
                 />
                 <button
                   type="submit"
-                  className="px-6 py-3 bg-cream-100 text-near-black text-xs font-mono tracking-widest uppercase hover:bg-cream-200 transition-colors flex items-center justify-center gap-2 group"
+                  className="px-6 py-3 bg-amber-200 text-near-black text-xs font-mono tracking-widest uppercase hover:bg-amber-300 transition-colors flex items-center justify-center gap-2 group font-semibold"
                 >
                   <span>Subscribe</span>
                   <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
@@ -63,16 +63,17 @@ export const Footer: React.FC = () => {
           {/* Brand Philosophy Statement */}
           <div className="lg:col-span-5 lg:col-start-8 flex flex-col justify-between space-y-6">
             <div>
-              <span className="text-xs font-mono tracking-widest uppercase text-cream-400 block mb-4">
-                Atelier Location
+              <span className="text-xs font-mono tracking-widest uppercase text-amber-300/80 block mb-4">
+                Store Flagships
               </span>
               <p className="font-serif text-lg text-cream-200 leading-relaxed italic">
                 "{siteConfig.philosophy}"
               </p>
             </div>
-            <div className="text-xs font-mono tracking-wider text-cream-400">
+            <div className="text-xs font-mono tracking-wider text-cream-400 space-y-1">
+              <p className="text-cream-100 font-semibold">{siteConfig.name}</p>
               <p className="text-cream-200">{siteConfig.contact.address}</p>
-              <p className="mt-1">{siteConfig.contact.email}</p>
+              <p className="mt-1 text-cream-300">{siteConfig.contact.email}</p>
             </div>
           </div>
         </div>
@@ -82,6 +83,7 @@ export const Footer: React.FC = () => {
           <div>
             <h4 className="text-cream-200 mb-4 font-semibold">Collections</h4>
             <ul className="space-y-3">
+              <li><Link href="/shop?category=new" className="hover:text-amber-200 transition-colors">New Arrivals</Link></li>
               <li><Link href="/shop?category=outerwear" className="hover:text-cream-100 transition-colors">Outerwear</Link></li>
               <li><Link href="/shop?category=tailoring" className="hover:text-cream-100 transition-colors">Tailoring</Link></li>
               <li><Link href="/shop?category=knitwear" className="hover:text-cream-100 transition-colors">Knitwear</Link></li>
@@ -93,16 +95,16 @@ export const Footer: React.FC = () => {
             <h4 className="text-cream-200 mb-4 font-semibold">Concierge</h4>
             <ul className="space-y-3">
               <li><Link href="/about" className="hover:text-cream-100 transition-colors">Garment Care</Link></li>
-              <li><Link href="/about" className="hover:text-cream-100 transition-colors">Shipping & Returns</Link></li>
+              <li><Link href="/about" className="hover:text-cream-100 transition-colors">Sri Lanka & Australia Delivery</Link></li>
               <li><Link href="/about" className="hover:text-cream-100 transition-colors">Bespoke Fitting</Link></li>
-              <li><Link href="/about" className="hover:text-cream-100 transition-colors">Contact Atelier</Link></li>
+              <li><Link href="/about" className="hover:text-cream-100 transition-colors">Contact Store</Link></li>
             </ul>
           </div>
 
           <div>
-            <h4 className="text-cream-200 mb-4 font-semibold">Atelier</h4>
+            <h4 className="text-cream-200 mb-4 font-semibold">Store Ethos</h4>
             <ul className="space-y-3">
-              <li><Link href="/about" className="hover:text-cream-100 transition-colors">Our Ethos</Link></li>
+              <li><Link href="/about" className="hover:text-cream-100 transition-colors">Our Story</Link></li>
               <li><Link href="/about" className="hover:text-cream-100 transition-colors">Materials & Sourcing</Link></li>
               <li><Link href="/about" className="hover:text-cream-100 transition-colors">Sustainability</Link></li>
               <li><Link href="/about" className="hover:text-cream-100 transition-colors">Journal</Link></li>
@@ -111,11 +113,10 @@ export const Footer: React.FC = () => {
 
           <div>
             <h4 className="text-cream-200 mb-4 font-semibold">Region & Currency</h4>
-            <select className="bg-cream-100/10 border border-cream-100/20 text-cream-100 px-3 py-2 text-xs focus:outline-none w-full uppercase">
-              <option value="USD">United States (USD $)</option>
-              <option value="EUR">Europe (EUR €)</option>
-              <option value="GBP">United Kingdom (GBP £)</option>
-              <option value="JPY">Japan (JPY ¥)</option>
+            <select defaultValue="AUD" className="bg-cream-100/10 border border-cream-100/20 text-cream-100 px-3 py-2 text-xs focus:outline-none w-full uppercase">
+              <option value="AUD" className="bg-near-black text-cream-100">Australia (AUD $)</option>
+              <option value="LKR" className="bg-near-black text-cream-100">Sri Lanka (LKR Rs)</option>
+              <option value="USD" className="bg-near-black text-cream-100">Global (USD $)</option>
             </select>
           </div>
         </div>
