@@ -1,88 +1,37 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import { HeroSection } from '@/components/home/HeroSection';
-import { PhilosophySection } from '@/components/home/PhilosophySection';
-import { FeaturedCollection } from '@/components/home/FeaturedCollection';
-import { ProductGridPreview } from '@/components/home/ProductGridPreview';
-import { EditorialSplit } from '@/components/home/EditorialSplit';
-import { EditorialBanner } from '@/components/home/EditorialBanner';
-import { QuickViewModal } from '@/components/shop/QuickViewModal';
-import { InfiniteMarquee } from '@/components/ui/InfiniteMarquee';
-import { Product } from '@/config/products';
-
-const marqueeItems = [
-  "ERANGA'S CLOTHING STORE",
-  "SRI LANKA & AUSTRALIA",
-  "NEW ARRIVALS 2026",
-  "ITALIAN GABARDINE & CASHMERE",
-  "QUIET LUXURY",
-  "TAILORED SILHOUETTES",
-  "COLOMBO & MELBOURNE SHOWROOMS",
-  "FREE EXPRESS SHIPPING OVER $150 AUD",
-];
-
-const galleryImages = [
-  "/apparel1.jpg",
-  "/apparel5.jpg",
-  "/apparel2.jpg",
-  "/apparel6.jpg",
-  "/apparel3.jpg",
-  "/apparel7.jpg",
-  "/apparel4.jpg",
-  "/apparel8.jpg",
-  "/media/featured-1.png",
-  "/media/featured-2.png",
-  "/media/featured-3.png",
-  "/media/featured-4.png",
-];
+import { BrandStatementSection } from '@/components/home/BrandStatementSection';
+import { CapabilitiesSection } from '@/components/home/CapabilitiesSection';
+import { GlobalNetworkSection } from '@/components/home/GlobalNetworkSection';
+import { CertificationsSection } from '@/components/home/CertificationsSection';
+import { ClosingCTASection } from '@/components/home/ClosingCTASection';
+import { MobileStickyCTA } from '@/components/layout/MobileStickyCTA';
 
 export default function HomePage() {
-  const [quickViewProduct, setQuickViewProduct] = useState<Product | null>(null);
-
   return (
-    <main className="min-h-screen bg-cream-100 font-sans">
-      {/* Section 1: Full-bleed hero video with fade-up tagline */}
+    <main className="min-h-screen bg-cream-100 font-sans text-naxis-brown selection:bg-naxis-brown selection:text-naxis-gold-light">
+      {/* (1) Full-bleed hero image/video with slow fade/zoom and centered NAXIS wordmark + tagline */}
       <HeroSection />
 
-      {/* Infinite Auto-scrolling Strip directly below Hero */}
-      <InfiniteMarquee items={marqueeItems} speed={35} type="text" separator="✦" />
+      {/* (2) One-line brand statement about global manufacturing excellence that reveals on scroll */}
+      <BrandStatementSection />
 
-      {/* Section 2: One-line brand philosophy in large serif type that reveals on scroll */}
-      <PhilosophySection />
+      {/* (3) Capabilities preview — large image tiles for product categories with slow hover zoom */}
+      <CapabilitiesSection />
 
-      {/* Gallery Marquee (scrolling opposite direction, right to left) placed directly below Philosophy */}
-      <div className="py-2 bg-cream-100 border-b border-cream-200/60 overflow-hidden">
-        <div className="text-center mb-3">
-          <span className="text-[10px] font-mono tracking-[0.3em] uppercase text-editorial-muted">
-            &mdash; GARMENT GALLERY &mdash;
-          </span>
-        </div>
-        <InfiniteMarquee
-          items={galleryImages}
-          speed={38}
-          direction="right"
-          type="images"
-        />
-      </div>
+      {/* (4) Global Network section showing countries of operation (Sri Lanka, India, Bangladesh, Vietnam, China, Italy) */}
+      <GlobalNetworkSection />
 
-      {/* Section 3: Featured collection — large image tiles with hover zoom */}
-      <FeaturedCollection />
+      {/* (5) Certifications strip showing SEDEX/WRAP/C-TPAT badges alongside the circular heritage seal */}
+      <CertificationsSection />
 
-      {/* Section 4: Product grid preview — cards with image crossfade on hover */}
-      <ProductGridPreview onQuickView={(p) => setQuickViewProduct(p)} />
+      {/* (6) Closing call-to-action section with prominent "Call" and "WhatsApp/Text" buttons */}
+      <ClosingCTASection />
 
-      {/* Section 5: Full-bleed Editorial Video Banner */}
-      <EditorialBanner />
-
-      {/* Section 6: Editorial split section with vertical video & story text */}
-      <EditorialSplit />
-
-      {/* Quick View Modal */}
-      <QuickViewModal
-        product={quickViewProduct}
-        onClose={() => setQuickViewProduct(null)}
-      />
+      {/* Mobile-first Sticky Call & WhatsApp CTA */}
+      <MobileStickyCTA />
     </main>
   );
 }

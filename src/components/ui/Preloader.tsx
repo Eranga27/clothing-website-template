@@ -1,37 +1,44 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
+import { siteConfig } from '@/config/site';
 
 export const Preloader: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [progress, setProgress] = useState(0);
+  const shouldReduceMotion = useReducedMotion();
 
   useEffect(() => {
-    // Smooth progress counter simulation
+    if (shouldReduceMotion) {
+      setLoading(false);
+      return;
+    }
+
     const interval = setInterval(() => {
       setProgress((prev) => {
         if (prev >= 100) {
           clearInterval(interval);
           return 100;
         }
-        // Random incremental steps for natural loading feel
-        const diff = Math.floor(Math.random() * 15) + 8;
+        const diff = Math.floor(Math.random() * 20) + 12;
         return Math.min(prev + diff, 100);
       });
-    }, 180);
+    }, 120);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [shouldReduceMotion]);
 
   useEffect(() => {
     if (progress === 100) {
       const timer = setTimeout(() => {
         setLoading(false);
-      }, 500); // Brief hold at 100% before curtain reveal
+      }, 400);
       return () => clearTimeout(timer);
     }
   }, [progress]);
+
+  if (shouldReduceMotion) return null;
 
   return (
     <AnimatePresence mode="wait">
@@ -41,68 +48,48 @@ export const Preloader: React.FC = () => {
           initial={{ y: 0 }}
           exit={{ 
             y: '-100%', 
-            transition: { duration: 0.9, ease: [0.76, 0, 0.24, 1] } 
+            transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1] } 
           }}
-          className="fixed inset-0 z-[100] bg-near-black text-cream-100 flex flex-col items-center justify-between py-16 px-8 select-none"
+          className="fixed inset-0 z-[100] bg-naxis-brown-espresso text-cream-100 flex flex-col items-center justify-between py-16 px-8 select-none"
         >
           {/* Top Tagline */}
-          <motion.div 
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-[10px] font-mono uppercase tracking-[0.35em] text-amber-300/80"
-          >
-            ERANGA'S CLOTHING STORE &bull; SRI LANKA & AUSTRALIA
-          </motion.div>
-
-          {/* Centered Minimalist Welcome Message & Logo */}
-          <div className="flex flex-col items-center gap-6 max-w-lg text-center">
-            <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-              className="relative p-4"
-            >
-              {/* Radiant ambient gold halo behind logo */}
-              <div className="absolute inset-0 bg-amber-400/20 rounded-full blur-3xl animate-pulse" />
-              
-              {/* Logo asset with high-contrast white filter */}
-              <img
-                src="/logo.png"
-                alt="Eranga's Clothing Store"
-                className="h-16 md:h-20 w-auto object-contain relative z-10 filter invert brightness-200 drop-shadow-[0_0_25px_rgba(255,255,255,0.4)]"
-              />
-            </motion.div>
-
-            {/* Simplistic & Minimalist Welcome Text */}
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ delay: 0.2, duration: 1 }}
-              className="space-y-2"
-            >
-              <h2 className="font-serif italic text-2xl md:text-3xl font-light text-cream-100 tracking-wide">
-                Welcome, Our Distinguished Shopper
-              </h2>
-              <p className="text-[11px] font-mono tracking-[0.25em] text-cream-300/70 uppercase">
-                Curated Elegance & Architectural Form
-              </p>
-            </motion.div>
+          <div className="text-[10px] font-mono uppercase tracking-super-wide text-naxis-gold-light/90">
+            NAXIS &bull; GLOBAL OFFSHORE ATELIER
           </div>
 
-          {/* Bottom Progress Bar & Percentage */}
+          {/* Centered Minimalist Logo */}
+          <div className="flex flex-col items-center gap-6 max-w-lg text-center">
+            <div className="relative p-4">
+              <div className="absolute inset-0 bg-naxis-gold/15 rounded-full blur-2xl" />
+              <img
+                src="/logo.png"
+                alt="NAXIS"
+                className="h-14 md:h-18 w-auto object-contain relative z-10 filter drop-shadow-[0_0_20px_rgba(184,145,47,0.3)]"
+              />
+            </div>
+
+            <div className="space-y-1.5">
+              <h2 className="font-serif italic text-2xl md:text-3xl font-light text-cream-100 tracking-wide">
+                Offshore Garment Manufacturing
+              </h2>
+              <p className="text-[10px] font-mono tracking-super-wide text-cream-300/70 uppercase">
+                Six Sovereign Territories &bull; Uncompromising Precision
+              </p>
+            </div>
+          </div>
+
+          {/* Bottom Progress Bar */}
           <div className="w-full max-w-xs flex flex-col items-center gap-3">
-            <div className="w-full bg-cream-100/15 h-[2px] rounded-full overflow-hidden relative">
+            <div className="w-full bg-cream-100/10 h-[2px] rounded-full overflow-hidden relative">
               <motion.div
-                className="bg-amber-200 h-full rounded-full transition-all duration-200 ease-out"
+                className="bg-naxis-gold h-full rounded-full transition-all duration-150 ease-out"
                 style={{ width: `${progress}%` }}
               />
             </div>
 
             <div className="w-full flex justify-between items-center text-[10px] font-mono tracking-widest text-cream-300/80 uppercase">
-              <span>Initializing Store</span>
-              <span className="font-semibold text-amber-200">{progress}%</span>
+              <span>Initializing Atelier</span>
+              <span className="font-semibold text-naxis-gold">{progress}%</span>
             </div>
           </div>
         </motion.div>
