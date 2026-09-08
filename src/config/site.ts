@@ -93,7 +93,7 @@ export const siteConfig: SiteConfig = {
     { name: "Contact", href: "/#contact" },
   ],
 
-  heroVideoUrl: "/media/horizontal1.mp4",
+  heroVideoUrl: "/media/hero-compressed-video.mp4",
   heroFallbackImage: "/apparel1.jpg",
 
   contact: {

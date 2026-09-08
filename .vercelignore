@@ -1,5 +1,7 @@
-node_modules
-node_modules_old
-media
+/node_modules
+/node_modules_old
+/media
 .git
 .next
+public/media/vertical1.mp4
+public/media/horizontal2.mp4
