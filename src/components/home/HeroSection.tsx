@@ -43,7 +43,7 @@ export const HeroSection: React.FC = () => {
             videoLoaded ? 'opacity-100' : 'opacity-80'
           }`}
         >
-          <source src={siteConfig.heroVideoUrl} type="video/mp4" />
+          <source src="/media/hero-compressed-video.mp4" type="video/mp4" />
         </video>
       </motion.div>
 
