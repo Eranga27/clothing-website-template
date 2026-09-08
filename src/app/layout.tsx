@@ -1,35 +1,37 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import { siteConfig } from '@/config/site';
-import { CartProvider } from '@/context/CartContext';
 import { AnnouncementBar } from '@/components/layout/AnnouncementBar';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
-import { CartDrawer } from '@/components/layout/CartDrawer';
-import { Toast } from '@/components/ui/Toast';
 import { Preloader } from '@/components/ui/Preloader';
 import { PageTransition } from '@/components/ui/PageTransition';
+import { SmoothScroll } from '@/components/ui/SmoothScroll';
 
 export const metadata: Metadata = {
   title: {
-    default: `${siteConfig.name} \u2022 ${siteConfig.tagline}`,
+    default: `${siteConfig.name} \u2022 ${siteConfig.subtagline}`,
     template: `%s \u2022 ${siteConfig.name}`,
   },
   description: siteConfig.description,
   keywords: [
     'offshore garment manufacturing',
-    'NAXIS apparel',
-    'luxury fashion production',
+    'NAXIS',
+    'apparel manufacturing partner',
     'sports fits activewear manufacturing',
     'leather belts manufacturing',
-    'SEDEX certified apparel factory',
-    'WRAP certified clothing manufacturer',
-    'Sri Lanka apparel',
-    'Vietnam outerwear production',
-    'Italian pattern tailoring',
+    'SEDEX certified apparel manufacturing',
+    'WRAP compliant clothing manufacturer',
+    'CT-PAT validated offshore production',
+    'Sri Lanka garment manufacturing',
+    'Vietnam apparel production',
+    'India textile manufacturing',
+    'Bangladesh garment factory',
+    'China apparel trims',
+    'Italy pattern making tailoring',
   ],
   openGraph: {
-    title: `${siteConfig.name} \u2022 ${siteConfig.tagline}`,
+    title: `${siteConfig.name} \u2022 ${siteConfig.subtagline}`,
     description: siteConfig.description,
     siteName: siteConfig.name,
     locale: 'en_US',
@@ -44,8 +46,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className="bg-cream-100 text-near-black antialiased selection:bg-near-black selection:text-cream-100 min-h-screen flex flex-col justify-between">
-        <CartProvider>
+      <body className="bg-cream-100 text-naxis-brown antialiased selection:bg-naxis-brown selection:text-naxis-gold-light min-h-screen flex flex-col justify-between">
+        <SmoothScroll>
           <Preloader />
           <AnnouncementBar />
           <Navbar />
@@ -53,9 +55,7 @@ export default function RootLayout({
             <PageTransition>{children}</PageTransition>
           </div>
           <Footer />
-          <CartDrawer />
-          <Toast />
-        </CartProvider>
+        </SmoothScroll>
       </body>
     </html>
   );

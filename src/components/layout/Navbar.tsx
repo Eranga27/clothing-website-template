@@ -43,8 +43,8 @@ export const Navbar: React.FC = () => {
             </button>
 
             <nav className="hidden lg:flex items-center gap-8 text-[11px] font-mono tracking-super-wide uppercase">
-              <a
-                href="#capabilities"
+              <Link
+                href="/#capabilities"
                 className={`transition-colors duration-300 relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] hover:after:w-full after:transition-all after:duration-300 ${
                   isScrolled
                     ? 'text-naxis-brown/80 hover:text-naxis-gold after:bg-naxis-gold'
@@ -52,9 +52,9 @@ export const Navbar: React.FC = () => {
                 }`}
               >
                 Capabilities
-              </a>
-              <a
-                href="#global-network"
+              </Link>
+              <Link
+                href="/#global-network"
                 className={`transition-colors duration-300 relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] hover:after:w-full after:transition-all after:duration-300 ${
                   isScrolled
                     ? 'text-naxis-brown/80 hover:text-naxis-gold after:bg-naxis-gold'
@@ -62,9 +62,9 @@ export const Navbar: React.FC = () => {
                 }`}
               >
                 Global Network
-              </a>
-              <a
-                href="#certifications"
+              </Link>
+              <Link
+                href="/#certifications"
                 className={`transition-colors duration-300 relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] hover:after:w-full after:transition-all after:duration-300 ${
                   isScrolled
                     ? 'text-naxis-brown/80 hover:text-naxis-gold after:bg-naxis-gold'
@@ -72,11 +72,21 @@ export const Navbar: React.FC = () => {
                 }`}
               >
                 Certifications
-              </a>
+              </Link>
+              <Link
+                href="/about"
+                className={`transition-colors duration-300 relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] hover:after:w-full after:transition-all after:duration-300 ${
+                  isScrolled
+                    ? 'text-naxis-brown/80 hover:text-naxis-gold after:bg-naxis-gold'
+                    : 'text-cream-200/90 hover:text-cream-100 after:bg-cream-100'
+                }`}
+              >
+                About
+              </Link>
             </nav>
           </div>
 
-          {/* Center: Primary NAXIS Wordmark (Clean & Uncluttered) */}
+          {/* Center: Primary NAXIS Wordmark (Everyday brand mark, clean and restrained) */}
           <Link
             href="/"
             className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-center group flex items-center justify-center z-20"
@@ -100,7 +110,7 @@ export const Navbar: React.FC = () => {
                   ? 'text-naxis-brown hover:text-naxis-gold'
                   : 'text-cream-100 hover:text-naxis-gold-light'
               }`}
-              title="Call Australian Production Desk"
+              title="Call Production Desk"
             >
               <Phone className="w-3.5 h-3.5 text-naxis-gold" />
               <span className="hidden md:inline text-[11px] font-mono">{siteConfig.contact.phoneDisplay}</span>
@@ -129,13 +139,13 @@ export const Navbar: React.FC = () => {
               animate={{ opacity: 0.6 }}
               exit={{ opacity: 0 }}
               onClick={() => setMobileMenuOpen(false)}
-              className="fixed inset-0 bg-near-black z-50 backdrop-blur-xs"
+              className="fixed inset-0 bg-black z-50 backdrop-blur-xs"
             />
             <motion.div
               initial={{ x: '-100%' }}
               animate={{ x: 0 }}
               exit={{ x: '-100%' }}
-              transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
               className="fixed top-0 left-0 bottom-0 w-4/5 max-w-sm bg-cream-100 text-naxis-brown z-50 p-8 flex flex-col justify-between border-r border-naxis-brown/15 shadow-2xl"
             >
               <div>
@@ -148,67 +158,88 @@ export const Navbar: React.FC = () => {
                   <button
                     onClick={() => setMobileMenuOpen(false)}
                     aria-label="Close menu"
-                    className="p-1 text-naxis-brown/70 hover:text-naxis-brown"
+                    className="p-1 hover:text-naxis-gold transition-colors"
                   >
-                    <X className="w-5 h-5 stroke-[1.5]" />
+                    <X className="w-5 h-5" />
                   </button>
                 </div>
 
-                <nav className="flex flex-col gap-6 py-8">
-                  <a
-                    href="#capabilities"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="font-serif text-2xl tracking-wide text-naxis-brown hover:text-naxis-gold transition-colors"
-                  >
-                    Capabilities Preview
-                  </a>
-                  <a
-                    href="#global-network"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="font-serif text-2xl tracking-wide text-naxis-brown hover:text-naxis-gold transition-colors"
-                  >
-                    Global Network (6 Hubs)
-                  </a>
-                  <a
-                    href="#certifications"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="font-serif text-2xl tracking-wide text-naxis-brown hover:text-naxis-gold transition-colors"
-                  >
-                    Certifications & Provenance
-                  </a>
-                  <a
-                    href="#contact"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="font-serif text-2xl tracking-wide text-naxis-gold hover:text-naxis-brown transition-colors"
-                  >
-                    Direct Procurement Desk
-                  </a>
-                </nav>
+                <div className="mt-8 space-y-6 text-sm font-mono tracking-widest uppercase">
+                  <div>
+                    <Link
+                      href="/"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="block py-2 text-naxis-brown hover:text-naxis-gold transition-colors"
+                    >
+                      Home
+                    </Link>
+                  </div>
+                  <div>
+                    <Link
+                      href="/#capabilities"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="block py-2 text-naxis-brown hover:text-naxis-gold transition-colors"
+                    >
+                      Capabilities
+                    </Link>
+                  </div>
+                  <div>
+                    <Link
+                      href="/#global-network"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="block py-2 text-naxis-brown hover:text-naxis-gold transition-colors"
+                    >
+                      Global Network
+                    </Link>
+                  </div>
+                  <div>
+                    <Link
+                      href="/#certifications"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="block py-2 text-naxis-brown hover:text-naxis-gold transition-colors"
+                    >
+                      Certifications
+                    </Link>
+                  </div>
+                  <div>
+                    <Link
+                      href="/about"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="block py-2 text-naxis-brown hover:text-naxis-gold transition-colors"
+                    >
+                      About NAXIS
+                    </Link>
+                  </div>
+                  <div>
+                    <Link
+                      href="/#contact"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="block py-2 text-naxis-brown hover:text-naxis-gold transition-colors"
+                    >
+                      Contact
+                    </Link>
+                  </div>
+                </div>
               </div>
 
-              {/* Direct Actions in Mobile Drawer */}
+              {/* Mobile Drawer Bottom Contact Actions */}
               <div className="pt-6 border-t border-naxis-brown/10 space-y-3">
                 <a
                   href={`tel:${siteConfig.contact.phone}`}
-                  className="w-full py-3 bg-naxis-gold text-naxis-brown-deep font-mono text-xs uppercase tracking-widest font-semibold flex items-center justify-center gap-2"
+                  className="w-full py-3 bg-naxis-brown text-cream-100 font-mono text-xs uppercase tracking-widest flex items-center justify-center gap-2"
                 >
-                  <Phone className="w-4 h-4" />
+                  <Phone className="w-4 h-4 text-naxis-gold" />
                   <span>Call {siteConfig.contact.phoneDisplay}</span>
                 </a>
-
                 <a
                   href={siteConfig.contact.whatsappLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full py-3 bg-naxis-emerald text-cream-100 font-mono text-xs uppercase tracking-widest font-semibold flex items-center justify-center gap-2"
+                  className="w-full py-3 bg-naxis-emerald text-cream-100 font-mono text-xs uppercase tracking-widest flex items-center justify-center gap-2"
                 >
-                  <MessageSquare className="w-4 h-4" />
-                  <span>WhatsApp / Direct Text</span>
+                  <MessageSquare className="w-4 h-4 text-cream-100" />
+                  <span>WhatsApp Production Desk</span>
                 </a>
-
-                <div className="text-[11px] font-mono text-editorial-muted text-center pt-2">
-                  Melbourne & Colombo &bull; Est. Global Operations
-                </div>
               </div>
             </motion.div>
           </>

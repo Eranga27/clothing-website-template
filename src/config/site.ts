@@ -1,6 +1,6 @@
 /**
- * NAXIS — Offshore Garment Manufacturing & Apparel Atelier
- * Global manufacturing partner for luxury, premium lifestyle, and technical sportswear brands.
+ * NAXIS — Offshore Garment Manufacturing
+ * Corporate configuration file with verified company facts and client copy deck.
  */
 
 export interface CountryHub {
@@ -8,26 +8,27 @@ export interface CountryHub {
   name: string;
   code: string;
   region: string;
-  facilities: string;
-  capacity: string;
-  specialization: string;
-  leadTime: string;
-  certifications: string[];
   description: string;
-  keyStrengths: string[];
+  confirmPlaceholder: string;
+  highlights: string[];
   image: string;
 }
 
 export interface CapabilityCategory {
   id: string;
   title: string;
-  subtitle: string;
-  tagline: string;
   description: string;
+  confirmPlaceholder?: string;
   image: string;
   specs: string[];
-  moq: string;
-  finishing: string;
+  isPlaceholder?: boolean;
+}
+
+export interface CertificationItem {
+  acronym: string;
+  name: string;
+  tag: string;
+  description: string;
 }
 
 export interface SiteConfig {
@@ -37,9 +38,8 @@ export interface SiteConfig {
   description: string;
   announcement: string;
   brandStatement: string;
-  /** @deprecated legacy field kept for e-commerce shop compatibility */
-  philosophy: string;
-  /** @deprecated legacy field kept for e-commerce shop/cart compatibility */
+  marqueeItems: string[];
+  /** @deprecated shim kept for any residual imports */
   currency: {
     code: string;
     symbol: string;
@@ -57,26 +57,28 @@ export interface SiteConfig {
     hqAddress: string;
     offices: string[];
   };
-  stats: Array<{ value: string; label: string }>;
   countries: CountryHub[];
   capabilities: CapabilityCategory[];
-  certifications: Array<{
-    name: string;
-    acronym: string;
-    issuer: string;
-    description: string;
-  }>;
+  certifications: CertificationItem[];
 }
 
 export const siteConfig: SiteConfig = {
   name: "NAXIS",
-  tagline: "Offshore Garment Manufacturing Excellence",
-  subtagline: "Sovereign Craftsmanship • Global Manufacturing Scale • Ethical Provenance",
-  description: "NAXIS is an offshore garment manufacturing partner powering world-class fashion houses, performance labels, and luxury brands across 6 sovereign production hubs.",
-  announcement: "ISO 9001 & SEDEX Smeta Certified Offshore Manufacturing Facilities • 2026 Production Window Open",
-  brandStatement: "Architecting offshore garment manufacturing with the precision of an haute couture atelier and the scale of a global supply chain.",
-  // Legacy compatibility shim — used by shop/cart/checkout pages
-  philosophy: "Engineering garments at the intersection of sovereign craftsmanship and global industrial precision.",
+  tagline: "Offshore Garment Manufacturing",
+  subtagline: "Precision Manufacturing. Six Countries. One Standard.",
+  description: "NAXIS partners with global apparel brands to deliver offshore garment manufacturing you can trust — from sportswear to leather accessories, produced across Sri Lanka, India, Bangladesh, Vietnam, China, and Italy.",
+  announcement: "SEDEX, WRAP & CT-PAT Certified Offshore Garment Manufacturing • Melbourne & Colombo",
+  brandStatement: "We manufacture with the discipline of a global operation and the care of a small workshop.",
+  
+  marqueeItems: [
+    "SEDEX CERTIFIED",
+    "WRAP COMPLIANT",
+    "CT-PAT VALIDATED",
+    "SIX COUNTRIES",
+    "ONE STANDARD",
+  ],
+
+  // Backward compatibility shim
   currency: {
     code: "AUD",
     symbol: "$",
@@ -84,11 +86,11 @@ export const siteConfig: SiteConfig = {
   },
   
   navigation: [
-    { name: "Capabilities", href: "#capabilities" },
-    { name: "Global Network", href: "#global-network" },
-    { name: "Certifications", href: "#certifications" },
-    { name: "About NAXIS", href: "#about" },
-    { name: "Procurement", href: "#contact" },
+    { name: "Capabilities", href: "/#capabilities" },
+    { name: "Global Network", href: "/#global-network" },
+    { name: "Certifications", href: "/#certifications" },
+    { name: "About", href: "/about" },
+    { name: "Contact", href: "/#contact" },
   ],
 
   heroVideoUrl: "/media/horizontal1.mp4",
@@ -102,22 +104,11 @@ export const siteConfig: SiteConfig = {
     email: "production@naxis-garments.com",
     hqAddress: "Collins Street Commercial Precinct, Melbourne VIC 3000, Australia",
     offices: [
-      "Melbourne (Executive & Client Services)",
-      "Colombo (High-Tech Activewear & Sustainable Operations)",
-      "Dhaka (Volume Wovens & Technical Tailoring)",
-      "Tirupur / Mumbai (Organic Textiles & Circular Knits)",
-      "Ho Chi Minh City (Bonded Apparel & Outerwear)",
-      "Shanghai / Ningbo (Advanced Synthetics & Custom Trims)",
-      "Milan (Pattern Engineering & Material Sourcing)",
+      "Melbourne (Headquarters & Client Services)",
+      "Colombo (Headquarters & Production Operations)",
+      "[CONFIRM WITH CLIENT: Additional office/factory locations]",
     ],
   },
-
-  stats: [
-    { value: "6", label: "Sovereign Production Hubs" },
-    { value: "100%", label: "SEDEX & WRAP Audited Facilities" },
-    { value: "<0.12%", label: "Micro-tolerance Quality Threshold" },
-    { value: "4.2M+", label: "Garments Engineered Annually" },
-  ],
 
   countries: [
     {
@@ -125,13 +116,13 @@ export const siteConfig: SiteConfig = {
       name: "Sri Lanka",
       code: "LK",
       region: "South Asia",
-      facilities: "3 Atelier & High-Tech Facilities (Colombo & Biyagama EPZ)",
-      capacity: "950,000 units / month",
-      specialization: "Technical Activewear, Bonded Seamless & High-End Knits",
-      leadTime: "30–45 days",
-      certifications: ["SEDEX Smeta", "WRAP Gold", "OEKO-TEX Standard 100", "GOTS Organic"],
-      description: "Recognized as the ethical garment capital of South Asia. Zero-carbon manufacturing certified plants with computerized laser cutting, ultrasonic bonding, and high-gauge seamless sportswear.",
-      keyStrengths: ["Ethical labor sovereignty", "Ultrasonic seam bonding", "Duty-free export channels", "Rapid prototyping lab"],
+      description: "Known across South Asia for ethical, well-regulated garment production.",
+      confirmPlaceholder: "[CONFIRM: specific specialization — activewear, knits, etc.]",
+      highlights: [
+        "Ethical, well-regulated garment production",
+        "Direct shipping routes to APAC, EU & US markets",
+        "[CONFIRM: verified facility specialization]",
+      ],
       image: "/apparel1.jpg",
     },
     {
@@ -139,13 +130,13 @@ export const siteConfig: SiteConfig = {
       name: "India",
       code: "IN",
       region: "South Asia",
-      facilities: "4 Specialized Mills & Sewing Hubs (Tirupur, Coimbatore, Mumbai)",
-      capacity: "1,200,000 units / month",
-      specialization: "Organic Cotton, Fine Linens, Luxury Jersey & Artisanal Embellishment",
-      leadTime: "35–50 days",
-      certifications: ["GOTS Certified", "Fair Trade", "SA8000", "ISO 9001:2015"],
-      description: "Direct farm-to-hanger vertical integration. Unrivaled organic cotton cultivation, artisanal hand-embroidery, premium heavy-weight French terry, and mercerized luxury shirting.",
-      keyStrengths: ["Farm-to-fabric yarn tracing", "Supima & GOTS certified organic", "Complex wash treatments", "Mercerized luxury knits"],
+      description: "A strong base for textiles and natural-fiber production.",
+      confirmPlaceholder: "[CONFIRM specialization]",
+      highlights: [
+        "Rich textile and natural-fiber foundation",
+        "Integrated spinning, weaving, and knitting",
+        "[CONFIRM: verified facility specialization]",
+      ],
       image: "/apparel2.jpg",
     },
     {
@@ -153,13 +144,13 @@ export const siteConfig: SiteConfig = {
       name: "Bangladesh",
       code: "BD",
       region: "South Asia",
-      facilities: "2 Platinum LEED Certified Production Campuses (Dhaka & Gazipur)",
-      capacity: "1,600,000 units / month",
-      specialization: "Structured Wovens, Tailored Trousers, Denim & Workwear",
-      leadTime: "40–55 days",
-      certifications: ["LEED Platinum", "SEDEX 4-Pillar", "WRAP Platinum", "C-TPAT Tier 2"],
-      description: "World-leading green manufacturing campuses. Unmatched production volume for structured tailored blazers, precision trousers, luxury selvedge denim, and automated outerwear lines.",
-      keyStrengths: ["LEED certified water recycling", "High-volume price efficiency", "Automated hanger conveyer systems", "Laser denim distressing"],
+      description: "High-volume production capability for large orders.",
+      confirmPlaceholder: "[CONFIRM specialization]",
+      highlights: [
+        "High-volume manufacturing infrastructure",
+        "Established large-batch efficiency",
+        "[CONFIRM: verified facility specialization]",
+      ],
       image: "/apparel3.jpg",
     },
     {
@@ -167,13 +158,13 @@ export const siteConfig: SiteConfig = {
       name: "Vietnam",
       code: "VN",
       region: "Southeast Asia",
-      facilities: "2 Performance Outerwear Hubs (Ho Chi Minh City & Binh Duong)",
-      capacity: "750,000 units / month",
-      specialization: "Performance Outerwear, Waterproof Membrane Shells & Skiwear",
-      leadTime: "35–45 days",
-      certifications: ["bluesign® approved", "ISO 14001", "C-TPAT", "WRAP Gold"],
-      description: "State-of-the-art climate-controlled cleanrooms dedicated to 3-layer laminated waterproof garments, taped seams, down-filled technical jackets, and aerodynamic cycling fits.",
-      keyStrengths: ["Seam-sealing precision", "DWR fluorine-free coatings", "Technical down baffles", "CPTPP trade advantages"],
+      description: "A growing hub for apparel export with modern facilities.",
+      confirmPlaceholder: "[CONFIRM specialization]",
+      highlights: [
+        "Modern export-oriented facilities",
+        "Advanced technical assembly lines",
+        "[CONFIRM: verified facility specialization]",
+      ],
       image: "/apparel5.jpg",
     },
     {
@@ -181,13 +172,13 @@ export const siteConfig: SiteConfig = {
       name: "China",
       code: "CN",
       region: "East Asia",
-      facilities: "3 Specialized Facilities (Zhejiang, Guangdong & Jiangsu)",
-      capacity: "1,100,000 units / month",
-      specialization: "Engineered Synthetics, Custom Alloy Hardware & Leathergoods",
-      leadTime: "25–40 days",
-      certifications: ["ISO 9001", "GRS Global Recycled", "OEKO-TEX", "Sedex"],
-      description: "Precision micro-engineering hub. Pioneers in custom hardware casting, electroplated gold and matte-black metal finishes, bonded vegan leathers, and high-performance nylon synthetics.",
-      keyStrengths: ["Custom alloy mold making", "Rapid 7-day 3D tech-pack sampling", "Micro-engineered zippers & pulls", "Fine leather crafting"],
+      description: "Advanced manufacturing capability and access to a wide range of trims and materials.",
+      confirmPlaceholder: "[CONFIRM specialization]",
+      highlights: [
+        "Advanced manufacturing precision",
+        "Extensive trims, hardware & raw material access",
+        "[CONFIRM: verified facility specialization]",
+      ],
       image: "/apparel4.jpg",
     },
     {
@@ -195,13 +186,13 @@ export const siteConfig: SiteConfig = {
       name: "Italy",
       code: "IT",
       region: "Southern Europe",
-      facilities: "1 Tailoring Atelier & Pattern Engineering Studio (Prato & Biella)",
-      capacity: "120,000 units / month",
-      specialization: "Master Pattern Architecture, Sartorial Tailoring & Cashmere",
-      leadTime: "20–35 days",
-      certifications: ["100% Made in Italy Traceability", "Animal Welfare Wool Protocol", "ISO 9001"],
-      description: "The creative and technical apex of the NAXIS network. Italian master pattern cutters develop sizing architecture, bespoke luxury suiting, and source premium double-faced woollens.",
-      keyStrengths: ["Master Italian pattern drafting", "Virgin wool & pure cashmere blends", "Haute couture hand-finishing", "EU client dispatch"],
+      description: "Pattern-making and material sourcing expertise, drawing on longstanding tailoring tradition.",
+      confirmPlaceholder: "[CONFIRM specialization]",
+      highlights: [
+        "Pattern-making and architectural sizing",
+        "Longstanding tailoring and premium sourcing",
+        "[CONFIRM: verified facility specialization]",
+      ],
       image: "/apparel7.jpg",
     },
   ],
@@ -209,87 +200,64 @@ export const siteConfig: SiteConfig = {
   capabilities: [
     {
       id: "sports-fits",
-      title: "Performance Sports Fits & Activewear",
-      subtitle: "Technical Athletic Silhouettes",
-      tagline: "Engineered compression, bonded seams, and 4-way aerodynamic elasticity.",
-      description: "We manufacture elite sportswear for international athletics, gymwear, and running brands. Utilizing 24-gauge circular knitting, laser micro-perforations, and thermo-welded bonding for chafe-free durability.",
+      title: "Sports Fits & Activewear",
+      description: "Compression wear, gymwear, and running apparel, manufactured to hold up to daily performance use.",
+      confirmPlaceholder: "[CONFIRM: any specific fabrics, MOQ, or lead time to mention]",
       image: "/apparel1.jpg",
-      specs: ["Ultrasonic Flatlock Seaming", "Moisture-Wicking Antimicrobial Treatment", "Custom Sublimation & High-Density Silicone", "4-Way Recycled Polyamide Elastane"],
-      moq: "500 pcs / style",
-      finishing: "Laser Edge Hemming & Reflective Heat Transfers",
+      specs: [
+        "Technical compression & 4-way stretch fabrics",
+        "Flatlock & bonded chafe-free seaming options",
+        "Moisture-wicking, breathable athletic knits",
+        "Custom silicone grips, badging & heat-seal transfers",
+      ],
     },
     {
       id: "belts-accessories",
-      title: "Handcrafted Belts & Leather Accessories",
-      subtitle: "Saddlery & Hardware Craftsmanship",
-      tagline: "Full-grain vegetable-tanned leathers, hand-burnished edges, and custom alloy buckles.",
-      description: "From reversible formal dress belts to heavy-duty tactical webbing and small leathergoods. Every piece is cut from certified hides, edge-painted in multiple coats, and fitted with custom-molded brand hardware.",
+      title: "Belts & Leather Accessories",
+      description: "Formal and casual belts, built from quality leathers with custom hardware to match your brand.",
+      confirmPlaceholder: "[CONFIRM: leather type, MOQ, or finishing details]",
       image: "/apparel6.jpg",
-      specs: ["Full-Grain & Bridle Grade Leathers", "Cast Solid Brass & Zinc Alloy Hardware", "Triple-Coat Hand Painted Edge Finishes", "Custom Hot-Stamping & Laser Debossing"],
-      moq: "300 pcs / colorway",
-      finishing: "Italian Edge Waxing & Corrosion-Resistant Electroplating",
+      specs: [
+        "Full-grain, bridle, and top-grain leather selections",
+        "Custom molded cast alloy and solid brass buckles",
+        "Precision edge beveling, painting, and burnishing",
+        "Blind debossing, laser etching, and foil stamp branding",
+      ],
     },
     {
-      id: "tailored-outerwear",
-      title: "Sartorial Outerwear & Tailoring",
-      subtitle: "Architectural Garment Construction",
-      tagline: "Double-faced wools, structured trench coats, tailored overcoats, and modern suiting.",
-      description: "Bridging the gap between bespoke atelier handcraft and offshore production scale. Our tailored lines feature full-canvas lapels, Bemberg cupro linings, horn buttons, and hand-basted shoulder heads.",
+      id: "client-categories-placeholder",
+      title: "[CONFIRM with client]",
+      description: "Placeholder — client mentioned 'sports fits, belts, etc.' — need the full category list before writing final copy. Suggested categories to ask about: outerwear, knitwear, denim, uniforms, accessories.",
+      confirmPlaceholder: "[CONFIRM WITH CLIENT: full category list]",
       image: "/apparel5.jpg",
-      specs: ["Floating Canvas Construction", "Water-Repellent Cotton Gabardine", "Premium Bemberg / Silk Lining Options", "Pick-Stitched Lapels & Functional Cuff Vents"],
-      moq: "300 pcs / style",
-      finishing: "Hand-Rolled Buttonholes & Molded Hanger Packaging",
-    },
-    {
-      id: "luxury-knits",
-      title: "Luxury Knitwear & Premium Circular Knits",
-      subtitle: "Tactile Yarn Innovation",
-      tagline: "Fine-gauge merino sweaters, heavy loopback French terry, and mercerized shirting.",
-      description: "Engineered on 12-gauge to 18-gauge computerized flat knits and heavyweight 450–520 GSM loopback jersey machines. Tested against shrinkage, pilling, and torque to exceed international boutique standards.",
-      image: "/apparel8.jpg",
-      specs: ["100% Extra-Fine Australian Merino Wool", "480 GSM Compact French Terry Cotton", "Garment Pigment Wash & Vintage Sun Fade", "Zero-Pill Combed Organic Cotton Yarns"],
-      moq: "400 pcs / colorway",
-      finishing: "Pre-Shrunk Cold Water Wash & Anti-Pill Enzyme Bath",
+      isPlaceholder: true,
+      specs: [
+        "Outerwear [CONFIRM with client]",
+        "Knitwear & Circular Knits [CONFIRM with client]",
+        "Tailoring & Wovens [CONFIRM with client]",
+        "Uniforms & Accessories [CONFIRM with client]",
+      ],
     },
   ],
 
   certifications: [
     {
-      name: "SEDEX Smeta 4-Pillar",
       acronym: "SEDEX",
-      issuer: "Supplier Ethical Data Exchange",
-      description: "Comprehensive audits on labor standards, health & safety, environmental management, and business ethics.",
+      name: "SEDEX Audited",
+      tag: "Labor Standards & Business Ethics",
+      description: "Independent audits covering labor standards, health and safety, and business ethics.",
     },
     {
-      name: "Worldwide Responsible Accredited Production",
       acronym: "WRAP",
-      issuer: "WRAP Global Board",
-      description: "Gold & Platinum certified compliance ensuring lawful, humane, and ethical manufacturing across all plants.",
+      name: "WRAP Compliant",
+      tag: "Humane & Ethical Manufacturing",
+      description: "Certified for lawful, humane, and ethical manufacturing practices.",
     },
     {
-      name: "Customs-Trade Partnership Against Terrorism",
-      acronym: "C-TPAT",
-      issuer: "U.S. Customs & Border Protection",
-      description: "Tier 2 supply chain security certification accelerating priority customs clearance for USA shipments.",
-    },
-    {
-      name: "OEKO-TEX® Standard 100",
-      acronym: "OEKO-TEX",
-      issuer: "International OEKO-TEX Association",
-      description: "Certified free from harmful chemicals, allergens, and toxic dyes across all threads, fabrics, and hardware.",
-    },
-    {
-      name: "Global Organic Textile Standard",
-      acronym: "GOTS",
-      issuer: "Global Standard gGmbH",
-      description: "Full supply chain traceability of organic cotton and raw natural fibers from harvesting to finished garment.",
-    },
-    {
-      name: "ISO 9001:2015 Quality Management",
-      acronym: "ISO 9001",
-      issuer: "International Organization for Standardization",
-      description: "Audited standardized quality assurance protocols ensuring 0.12% micro-tolerance defect rates.",
+      acronym: "CT-PAT",
+      name: "CT-PAT Validated",
+      tag: "Supply Chain Security",
+      description: "U.S. Customs-recognized supply chain security certification, supporting faster customs clearance.",
     },
   ],
 };
-

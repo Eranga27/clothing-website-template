@@ -1,127 +1,197 @@
 'use client';
 
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Phone, MessageSquare, Mail, Clock, ShieldCheck, Copy, Check, FileUp } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Phone, MessageSquare, Mail, ChevronDown, Check, Send } from 'lucide-react';
 import { siteConfig } from '@/config/site';
 import { EDITORIAL_EASING } from '../ui/ScrollReveal';
 
 export const ClosingCTASection: React.FC = () => {
-  const [copied, setCopied] = useState(false);
+  const [showInquiryForm, setShowInquiryForm] = useState(false);
+  const [formSubmitted, setFormSubmitted] = useState(false);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    company: '',
+    message: '',
+  });
 
-  const copyEmail = () => {
-    navigator.clipboard.writeText(siteConfig.contact.email);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2500);
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setFormSubmitted(true);
   };
 
   return (
     <section id="contact" className="py-24 md:py-36 bg-naxis-brown-espresso text-cream-100 relative overflow-hidden">
-      {/* Ambient Gold Radial Glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-naxis-gold/10 rounded-full blur-3xl pointer-events-none" />
+      {/* Subtle Radial Glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] bg-naxis-gold/10 rounded-full blur-3xl pointer-events-none" />
 
-      <div className="max-w-5xl mx-auto px-6 md:px-12 relative z-10 text-center">
+      <div className="max-w-4xl mx-auto px-6 md:px-12 relative z-10 text-center">
         {/* Subtle Kicker */}
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, ease: EDITORIAL_EASING }}
-          className="flex items-center justify-center gap-3 mb-6"
-        >
-          <span className="h-[1px] w-8 bg-naxis-gold/60" />
+        <div className="flex items-center justify-center gap-3 mb-6">
+          <span className="h-[1px] w-6 bg-naxis-gold/60" />
           <span className="text-[11px] font-mono tracking-super-wide uppercase text-naxis-gold-light">
-            Direct Procurement & Production Line
+            Direct Procurement Desk
           </span>
-          <span className="h-[1px] w-8 bg-naxis-gold/60" />
-        </motion.div>
+          <span className="h-[1px] w-6 bg-naxis-gold/60" />
+        </div>
 
-        {/* Headline */}
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7, delay: 0.1, ease: EDITORIAL_EASING }}
-          className="font-serif text-3xl sm:text-5xl md:text-6xl font-light tracking-tight text-cream-100 max-w-3xl mx-auto leading-[1.15] mb-6"
-        >
-          Initiate Your Next Production Run With Precision.
-        </motion.h2>
+        {/* Copy Deck Headline */}
+        <h2 className="font-serif text-3xl sm:text-5xl md:text-6xl font-light tracking-tight text-cream-100 max-w-2xl mx-auto leading-[1.15] mb-6">
+          Ready to Start a Production Run?
+        </h2>
 
-        {/* Subtitle */}
-        <motion.p
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7, delay: 0.2, ease: EDITORIAL_EASING }}
-          className="text-xs sm:text-sm font-sans text-cream-300/80 max-w-xl mx-auto leading-relaxed mb-12"
-        >
-          No automated queues or endless web forms. Speak directly with our executive production directors in Melbourne and Colombo for capacity reservations, sample prototyping, and duty-free cost modeling.
-        </motion.p>
+        {/* Copy Deck Body */}
+        <p className="text-sm md:text-base font-sans text-cream-200/85 max-w-lg mx-auto leading-relaxed mb-12">
+          Speak directly with our team — no long forms, no waiting in a queue.
+        </p>
 
-        {/* Prominent Direct Action Buttons: "Call" & "WhatsApp / Text" */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.3, ease: EDITORIAL_EASING }}
-          className="flex flex-col sm:flex-row items-stretch justify-center gap-4 sm:gap-6 max-w-xl mx-auto mb-12"
-        >
-          {/* Direct Phone Call Button */}
+        {/* Primary Action Buttons: Call Desk & WhatsApp */}
+        <div className="flex flex-col sm:flex-row items-stretch justify-center gap-4 sm:gap-6 max-w-xl mx-auto mb-10">
+          {/* Call Our Production Desk */}
           <a
             href={`tel:${siteConfig.contact.phone}`}
-            className="flex-1 px-8 py-5 bg-naxis-gold hover:bg-naxis-gold-light text-naxis-brown-deep font-semibold transition-all duration-300 ease-editorial shadow-xl hover:shadow-naxis-gold/25 group flex items-center justify-center gap-3 border border-naxis-gold-light/40"
+            className="flex-1 px-8 py-5 bg-naxis-gold hover:bg-naxis-gold-light text-naxis-brown-deep font-semibold transition-all duration-300 shadow-lg group flex items-center justify-center gap-3"
           >
-            <Phone className="w-5 h-5 text-naxis-brown-deep group-hover:scale-110 transition-transform" />
+            <Phone className="w-4 h-4 text-naxis-brown-deep group-hover:scale-110 transition-transform" />
             <div className="text-left">
-              <span className="block text-[10px] font-mono tracking-widest uppercase opacity-80 leading-none mb-1">
-                Voice Production Desk
+              <span className="block text-[10px] font-mono tracking-widest uppercase opacity-75 leading-none mb-1">
+                Direct Call
               </span>
-              <span className="font-mono text-sm tracking-wider block">
-                Call {siteConfig.contact.phoneDisplay}
+              <span className="font-mono text-sm tracking-wide block">
+                Call Our Production Desk
               </span>
             </div>
           </a>
 
-          {/* WhatsApp / Direct Text Button */}
+          {/* Message Us on WhatsApp */}
           <a
             href={siteConfig.contact.whatsappLink}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex-1 px-8 py-5 bg-naxis-emerald hover:bg-naxis-emerald-light text-cream-100 font-semibold transition-all duration-300 ease-editorial shadow-xl hover:shadow-naxis-emerald/25 group flex items-center justify-center gap-3 border border-emerald-400/30"
+            className="flex-1 px-8 py-5 bg-naxis-emerald hover:bg-emerald-700 text-cream-100 font-semibold transition-all duration-300 shadow-lg group flex items-center justify-center gap-3"
           >
-            <MessageSquare className="w-5 h-5 text-cream-100 group-hover:scale-110 transition-transform" />
+            <MessageSquare className="w-4 h-4 text-cream-100 group-hover:scale-110 transition-transform" />
             <div className="text-left">
               <span className="block text-[10px] font-mono tracking-widest uppercase opacity-80 leading-none mb-1">
-                Instant Messaging & RFQ
+                Instant Chat
               </span>
-              <span className="font-mono text-sm tracking-wider block">
-                WhatsApp / Text
+              <span className="font-mono text-sm tracking-wide block">
+                Message Us on WhatsApp
               </span>
             </div>
           </a>
-        </motion.div>
-
-        {/* Production Desk Operating Hours & Direct Dispatch */}
-        <div className="pt-8 border-t border-cream-100/10 max-w-2xl mx-auto flex flex-col sm:flex-row items-center justify-between text-xs font-mono text-cream-400 gap-4">
-          <div className="flex items-center gap-2">
-            <Clock className="w-4 h-4 text-naxis-gold" />
-            <span>Mon–Fri 08:00–18:00 AEST / Active Desk</span>
-          </div>
-
-          <button
-            onClick={copyEmail}
-            className="flex items-center gap-2 hover:text-naxis-gold-light transition-colors text-[11px]"
-          >
-            <Mail className="w-3.5 h-3.5" />
-            <span>{siteConfig.contact.email}</span>
-            {copied ? <Check className="w-3 h-3 text-naxis-emerald-light" /> : <Copy className="w-3 h-3 opacity-60" />}
-          </button>
         </div>
 
-        {/* Tech-Pack Submission Notice */}
-        <div className="mt-8 inline-flex items-center gap-2 px-4 py-2 bg-cream-100/5 border border-cream-100/10 text-[11px] font-mono text-cream-300">
-          <FileUp className="w-3.5 h-3.5 text-naxis-gold" />
-          <span>Have an existing Tech-Pack? Send via WhatsApp or email for a 48-hour landed cost projection.</span>
+        {/* Contact Email & Direct Desk Numbers */}
+        <div className="flex flex-wrap items-center justify-center gap-6 text-xs font-mono text-cream-300/80 mb-12">
+          <div className="flex items-center gap-2">
+            <span className="text-naxis-gold">•</span>
+            <span>Tel: {siteConfig.contact.phoneDisplay}</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="text-naxis-gold">•</span>
+            <a href={`mailto:${siteConfig.contact.email}`} className="hover:text-naxis-gold-light transition-colors underline underline-offset-4">
+              {siteConfig.contact.email}
+            </a>
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="text-naxis-gold">•</span>
+            <span>Melbourne & Colombo Executive Desks</span>
+          </div>
+        </div>
+
+        {/* Secondary Short Inquiry Form Option */}
+        <div className="max-w-md mx-auto pt-6 border-t border-cream-100/10 text-left">
+          <button
+            onClick={() => setShowInquiryForm(!showInquiryForm)}
+            className="w-full flex items-center justify-between text-xs font-mono uppercase tracking-widest text-cream-300 hover:text-naxis-gold transition-colors py-2"
+          >
+            <span>Or send a brief written inquiry</span>
+            <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${showInquiryForm ? 'rotate-180' : ''}`} />
+          </button>
+
+          <AnimatePresence>
+            {showInquiryForm && (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                exit={{ opacity: 0, height: 0 }}
+                transition={{ duration: 0.35, ease: EDITORIAL_EASING }}
+                className="overflow-hidden pt-4"
+              >
+                {formSubmitted ? (
+                  <div className="p-4 bg-naxis-emerald/20 border border-naxis-emerald text-xs font-mono text-cream-100 flex items-center gap-3">
+                    <Check className="w-4 h-4 text-naxis-emerald-light flex-shrink-0" />
+                    <span>Inquiry received. A production director will contact you directly within 24 hours.</span>
+                  </div>
+                ) : (
+                  <form onSubmit={handleSubmit} className="space-y-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      <div>
+                        <label className="block text-[10px] font-mono uppercase tracking-wider text-cream-400 mb-1">
+                          Your Name
+                        </label>
+                        <input
+                          type="text"
+                          required
+                          value={formData.name}
+                          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                          className="w-full bg-cream-100/5 border border-cream-100/20 px-3 py-2 text-xs font-sans text-cream-100 focus:outline-none focus:border-naxis-gold"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-[10px] font-mono uppercase tracking-wider text-cream-400 mb-1">
+                          Brand / Company
+                        </label>
+                        <input
+                          type="text"
+                          required
+                          value={formData.company}
+                          onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+                          className="w-full bg-cream-100/5 border border-cream-100/20 px-3 py-2 text-xs font-sans text-cream-100 focus:outline-none focus:border-naxis-gold"
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="block text-[10px] font-mono uppercase tracking-wider text-cream-400 mb-1">
+                        Work Email
+                      </label>
+                      <input
+                        type="email"
+                        required
+                        value={formData.email}
+                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                        className="w-full bg-cream-100/5 border border-cream-100/20 px-3 py-2 text-xs font-sans text-cream-100 focus:outline-none focus:border-naxis-gold"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-[10px] font-mono uppercase tracking-wider text-cream-400 mb-1">
+                        Inquiry Details (Category, volume, timeline)
+                      </label>
+                      <textarea
+                        rows={3}
+                        required
+                        value={formData.message}
+                        onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                        className="w-full bg-cream-100/5 border border-cream-100/20 px-3 py-2 text-xs font-sans text-cream-100 focus:outline-none focus:border-naxis-gold"
+                      />
+                    </div>
+
+                    <button
+                      type="submit"
+                      className="w-full py-3 bg-naxis-gold hover:bg-naxis-gold-light text-naxis-brown-deep text-xs font-mono uppercase tracking-widest font-semibold flex items-center justify-center gap-2 transition-colors"
+                    >
+                      <Send className="w-3.5 h-3.5" />
+                      <span>Submit Inquiry</span>
+                    </button>
+                  </form>
+                )}
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </div>
     </section>

@@ -1,119 +1,127 @@
 'use client';
 
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { ArrowUpRight, CheckCircle2 } from 'lucide-react';
-import { siteConfig, CapabilityCategory } from '@/config/site';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ChevronDown, ArrowRight } from 'lucide-react';
+import { siteConfig } from '@/config/site';
 import { EDITORIAL_EASING } from '../ui/ScrollReveal';
 
 export const CapabilitiesSection: React.FC = () => {
-  const [activeCategory, setActiveCategory] = useState<CapabilityCategory | null>(null);
+  const [expandedId, setExpandedId] = useState<string | null>(null);
+
+  const toggleAccordion = (id: string) => {
+    setExpandedId((prev) => (prev === id ? null : id));
+  };
 
   return (
     <section id="capabilities" className="py-24 md:py-36 bg-cream-50 text-naxis-brown border-b border-naxis-brown/10">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
-        {/* Section Header: Minimal Louis Vuitton Aesthetic */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 md:mb-20 pb-8 border-b border-naxis-brown/10 gap-6">
-          <div className="space-y-3">
-            <span className="text-[11px] font-mono tracking-super-wide uppercase text-naxis-gold block">
-              Atelier Engineering & Offshore Production
-            </span>
-            <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-light tracking-tight text-naxis-brown">
-              Manufacturing Capabilities
-            </h2>
-          </div>
-
-          <p className="max-w-md text-xs sm:text-sm font-sans text-editorial-muted leading-relaxed">
-            From technical compression gymwear to full-grain leather saddlery and structured double-face tailoring, our specialized production lines handle complex garment architecture.
+        {/* Section Header: masholdings pattern — headline -> two sentences */}
+        <div className="max-w-3xl mb-16 md:mb-20 space-y-4">
+          <span className="text-[11px] font-mono tracking-super-wide uppercase text-naxis-gold block">
+            Capabilities
+          </span>
+          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-light tracking-tight text-naxis-brown">
+            What We Manufacture
+          </h2>
+          <p className="text-sm md:text-base font-sans text-editorial-muted leading-relaxed">
+            From performance sportswear to handcrafted leather goods, our production lines are built to handle real orders at real scale.
           </p>
         </div>
 
-        {/* Large Image Tiles Grid with Slow Hover Zoom */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+        {/* Large Image Tiles Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10">
           {siteConfig.capabilities.map((cat, index) => {
-            const isWide = index === 0 || index === 3;
+            const isExpanded = expandedId === cat.id;
 
             return (
               <motion.div
                 key={cat.id}
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 25 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-60px' }}
-                transition={{ duration: 0.8, delay: index * 0.1, ease: EDITORIAL_EASING }}
-                className="group relative flex flex-col bg-white border border-naxis-brown/10 overflow-hidden shadow-xs hover:shadow-xl transition-shadow duration-700"
+                viewport={{ once: true, margin: '-50px' }}
+                transition={{ duration: 0.7, delay: index * 0.1, ease: EDITORIAL_EASING }}
+                className="group flex flex-col bg-white border border-naxis-brown/10 overflow-hidden shadow-xs hover:shadow-md transition-shadow duration-500"
               >
-                {/* Image Container with Slow Restrained Zoom */}
-                <div className="relative aspect-[4/3] sm:aspect-[16/11] w-full overflow-hidden bg-naxis-brown-deep">
+                {/* Large Image Container with Slow Restrained Zoom (scale 1.0 -> 1.05, ~600ms) */}
+                <div className="relative aspect-[4/3] w-full overflow-hidden bg-naxis-brown-deep">
                   <img
                     src={cat.image}
                     alt={cat.title}
-                    className="w-full h-full object-cover filter brightness-[0.92] contrast-[1.05] transition-transform duration-900 ease-editorial group-hover:scale-105"
+                    className="w-full h-full object-cover filter brightness-[0.92] contrast-[1.04] transition-transform duration-[600ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-105"
                   />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60 pointer-events-none" />
 
-                  {/* Gradient Overlay for Legibility */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-naxis-brown-deep/85 via-naxis-brown-deep/20 to-transparent opacity-80 group-hover:opacity-70 transition-opacity duration-600" />
-
-                  {/* Top Badge: Category index & MOQ */}
-                  <div className="absolute top-6 left-6 right-6 flex items-center justify-between text-cream-100 z-10">
-                    <span className="text-[11px] font-mono tracking-widest uppercase bg-naxis-brown-deep/80 backdrop-blur-md px-3 py-1 border border-cream-100/10 text-naxis-gold-light">
-                      Cat. 0{index + 1}
-                    </span>
-                    <span className="text-[11px] font-mono tracking-widest uppercase bg-naxis-brown-deep/80 backdrop-blur-md px-3 py-1 border border-cream-100/10 text-cream-200">
-                      MOQ: {cat.moq}
-                    </span>
-                  </div>
-
-                  {/* Bottom Overlay Title in Hero Image */}
-                  <div className="absolute bottom-6 left-6 right-6 z-10 text-cream-100 space-y-1">
-                    <span className="text-[10px] font-mono tracking-super-wide uppercase text-naxis-gold-light block">
-                      {cat.subtitle}
-                    </span>
-                    <h3 className="font-serif text-2xl sm:text-3xl font-light text-cream-100 leading-snug">
-                      {cat.title}
-                    </h3>
-                  </div>
+                  {cat.isPlaceholder && (
+                    <div className="absolute top-4 right-4 bg-naxis-brown-espresso/90 text-naxis-gold text-[10px] font-mono tracking-wider uppercase px-2.5 py-1 border border-naxis-gold/30">
+                      Client Confirmation
+                    </div>
+                  )}
                 </div>
 
-                {/* Content Details Block Below Image */}
-                <div className="p-6 md:p-8 flex flex-col justify-between flex-1 space-y-6">
-                  <div className="space-y-4">
-                    <p className="font-serif italic text-base text-naxis-gold text-pretty">
-                      "{cat.tagline}"
-                    </p>
+                {/* Content Body: Exactly one clear point */}
+                <div className="p-6 sm:p-8 flex flex-col justify-between flex-1 space-y-6">
+                  <div className="space-y-3">
+                    <h3 className="font-serif text-xl sm:text-2xl font-light text-naxis-brown leading-snug">
+                      {cat.title}
+                    </h3>
                     <p className="text-xs sm:text-sm font-sans text-editorial-muted leading-relaxed">
                       {cat.description}
                     </p>
+
+                    {cat.confirmPlaceholder && (
+                      <p className="text-[11px] font-mono text-naxis-gold italic leading-normal pt-1">
+                        {cat.confirmPlaceholder}
+                      </p>
+                    )}
                   </div>
 
-                  {/* Engineering Specifications List */}
+                  {/* Expandable Technical Details Accordion */}
                   <div className="pt-4 border-t border-naxis-brown/10 space-y-3">
-                    <span className="text-[10px] font-mono tracking-widest uppercase text-naxis-brown/60 block">
-                      Technical Engineering Specs:
-                    </span>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                      {cat.specs.map((spec, sIdx) => (
-                        <div key={sIdx} className="flex items-start gap-2 text-xs text-naxis-brown">
-                          <span className="text-naxis-emerald mt-0.5">▪</span>
-                          <span className="font-mono text-[11px] leading-tight text-naxis-brown/85">{spec}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Finishing and Action Link */}
-                  <div className="pt-4 border-t border-naxis-brown/10 flex items-center justify-between">
-                    <div className="text-[11px] font-mono text-editorial-muted">
-                      <span className="text-naxis-brown font-medium">Finishing: </span>
-                      {cat.finishing}
-                    </div>
-
-                    <a
-                      href="#contact"
-                      className="inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-widest text-naxis-gold hover:text-naxis-brown font-semibold transition-colors duration-300 group/link"
+                    <button
+                      onClick={() => toggleAccordion(cat.id)}
+                      className="w-full flex items-center justify-between text-xs font-mono uppercase tracking-wider text-naxis-brown hover:text-naxis-gold transition-colors py-1"
+                      aria-expanded={isExpanded}
                     >
-                      <span>Inquire</span>
-                      <ArrowUpRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
-                    </a>
+                      <span>Technical Details</span>
+                      <ChevronDown
+                        className={`w-4 h-4 transition-transform duration-300 ${
+                          isExpanded ? 'rotate-180 text-naxis-gold' : ''
+                        }`}
+                      />
+                    </button>
+
+                    <AnimatePresence>
+                      {isExpanded && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: 'auto', opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.35, ease: EDITORIAL_EASING }}
+                          className="overflow-hidden"
+                        >
+                          <ul className="space-y-2 pt-2 text-xs font-mono text-editorial-muted border-t border-naxis-brown/5">
+                            {cat.specs.map((spec, sIdx) => (
+                              <li key={sIdx} className="flex items-start gap-2">
+                                <span className="text-naxis-gold mt-0.5">•</span>
+                                <span>{spec}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+
+                    {/* Single Clear Call to Action */}
+                    <div className="pt-2">
+                      <a
+                        href="/#contact"
+                        className="inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-widest text-naxis-gold hover:text-naxis-brown font-semibold transition-colors"
+                      >
+                        <span>Inquire on Category</span>
+                        <ArrowRight className="w-3.5 h-3.5" />
+                      </a>
+                    </div>
                   </div>
                 </div>
               </motion.div>
