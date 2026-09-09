@@ -49,7 +49,6 @@ export default function RootLayout({
       <body className="bg-cream-100 text-naxis-brown antialiased selection:bg-naxis-brown selection:text-naxis-gold-light min-h-screen flex flex-col justify-between">
         <SmoothScroll>
           <Preloader />
-          <AnnouncementBar />
           <Navbar />
           <div className="flex-1">
             <PageTransition>{children}</PageTransition>
