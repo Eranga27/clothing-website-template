@@ -1,7 +1,7 @@
 /**
  * Product Data Configuration
  * 
- * Eranga's Clothing Store — Product Catalog
+ * NAXIS Offshore Garment Manufacturing — Capability & Category Catalog
  */
 
 export interface Product {

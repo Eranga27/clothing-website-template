@@ -46,10 +46,11 @@ module.exports = {
         'editorial-muted': '#7D756F',
       },
       fontFamily: {
+        poppins: ['var(--font-poppins)', 'Poppins', 'system-ui', 'sans-serif'],
+        display: ['var(--font-poppins)', 'Poppins', 'system-ui', 'sans-serif'],
+        grotesk: ['var(--font-poppins)', 'Poppins', 'system-ui', 'sans-serif'],
         serif: ['var(--font-cormorant)', 'var(--font-fraunces)', 'Cormorant Garamond', 'Fraunces', 'Didot', 'Bodoni MT', 'serif'],
         sans: ['var(--font-inter)', 'Inter', 'system-ui', 'sans-serif'],
-        grotesk: ['var(--font-syne)', 'Syne', 'Space Grotesk', 'system-ui', 'sans-serif'],
-        display: ['var(--font-syne)', 'Syne', 'Space Grotesk', 'system-ui', 'sans-serif'],
       },
       transitionTimingFunction: {
         'editorial': 'cubic-bezier(0.22, 1, 0.36, 1)',
