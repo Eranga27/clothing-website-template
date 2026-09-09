@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Menu, X, MessageSquare } from 'lucide-react';
+import { Menu, X, MessageSquare, Phone } from 'lucide-react';
 import { siteConfig } from '@/config/site';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -12,11 +12,7 @@ export const Navbar: React.FC = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 40) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
+      setIsScrolled(window.scrollY > 60);
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
@@ -24,71 +20,75 @@ export const Navbar: React.FC = () => {
 
   return (
     <>
-      <header
-        className={`fixed top-0 left-0 right-0 z-40 w-full transition-all duration-500 ease-editorial ${
-          isScrolled
-            ? 'bg-cream-100/95 backdrop-blur-md shadow-xs border-b border-naxis-brown/10 py-3.5 text-naxis-brown'
-            : 'bg-gradient-to-b from-black/60 via-black/20 to-transparent py-5 md:py-6 text-cream-100'
-        }`}
-      >
-        <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between relative min-h-[44px]">
-          {/* Left: Universal off-canvas trigger — hamburger on all breakpoints */}
-          <div className="flex items-center z-10">
-            <button
-              onClick={() => setMobileMenuOpen(true)}
-              className={`p-1.5 transition-all duration-300 hover:opacity-70 ${
-                isScrolled ? 'text-naxis-brown' : 'text-cream-100'
-              }`}
-              aria-label="Open navigation menu"
-            >
-              <Menu className="w-[18px] h-[18px] stroke-[1.5]" />
-            </button>
-          </div>
+      {/* ── Navbar: no full-width background — individual floating elements ── */}
+      <header className="fixed top-0 left-0 right-0 z-40 w-full pointer-events-none">
+        <div className="flex items-start justify-between px-4 sm:px-6 md:px-8 pt-4 sm:pt-5">
 
-          {/* Center: Primary NAXIS Wordmark (Everyday brand mark, clean and restrained) */}
+          {/* ── LEFT: Logo in a small transparent glass pill ── */}
           <Link
             href="/"
-            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-center group flex items-center justify-center z-20"
+            className={`pointer-events-auto flex items-center justify-center transition-all duration-400 group ${
+              isScrolled
+                ? 'bg-cream-100/95 backdrop-blur-md shadow-md border border-naxis-brown/10 px-3 py-2'
+                : 'bg-black/30 backdrop-blur-sm border border-white/10 px-3 py-2'
+            }`}
+            aria-label="NAXIS — Home"
           >
             <img
               src="/logo.png"
-              alt="NAXIS Offshore Garment Manufacturing"
-              className={`w-auto object-contain transition-all duration-300 group-hover:opacity-90 ${
-                isScrolled ? 'h-7 md:h-8' : 'h-8 md:h-10'
+              alt="NAXIS"
+              className={`w-auto object-contain transition-all duration-300 group-hover:opacity-80 ${
+                isScrolled ? 'h-6 md:h-7' : 'h-7 md:h-9'
               }`}
             />
           </Link>
 
-          {/* Right: Single primary action only */}
-          <div className="flex items-center z-10">
+          {/* ── RIGHT: Inquire + Hamburger ── */}
+          <div className="pointer-events-auto flex items-center gap-2 sm:gap-3">
+            {/* Inquire button */}
             <a
               href={siteConfig.contact.whatsappLink}
               target="_blank"
               rel="noopener noreferrer"
-              className={`px-5 py-2 text-[10px] md:text-[11px] font-mono tracking-widest uppercase font-semibold transition-all duration-300 shadow-sm flex items-center gap-2 ${
+              className={`flex items-center gap-1.5 px-4 py-2 text-[10px] sm:text-[11px] font-mono tracking-widest uppercase font-semibold transition-all duration-300 ${
                 isScrolled
-                  ? 'bg-naxis-gold hover:bg-naxis-gold-light text-naxis-brown-deep'
-                  : 'bg-cream-100/15 hover:bg-cream-100/25 text-cream-100 border border-cream-100/30 backdrop-blur-sm'
+                  ? 'bg-naxis-gold hover:bg-naxis-gold-light text-naxis-brown-deep shadow-md'
+                  : 'bg-black/30 backdrop-blur-sm border border-white/15 text-cream-100 hover:bg-black/50'
               }`}
             >
-              <MessageSquare className="w-3 h-3" />
+              <MessageSquare className="w-3 h-3 flex-shrink-0" />
               <span>Inquire</span>
             </a>
+
+            {/* Hamburger menu button */}
+            <button
+              onClick={() => setMobileMenuOpen(true)}
+              className={`p-2.5 transition-all duration-300 hover:opacity-70 ${
+                isScrolled
+                  ? 'bg-cream-100/95 backdrop-blur-md border border-naxis-brown/10 text-naxis-brown shadow-md'
+                  : 'bg-black/30 backdrop-blur-sm border border-white/15 text-cream-100'
+              }`}
+              aria-label="Open navigation menu"
+            >
+              <Menu className="w-4 h-4 stroke-[1.5]" />
+            </button>
           </div>
         </div>
       </header>
 
-      {/* Mobile Drawer Navigation */}
+      {/* ── Off-Canvas Drawer Navigation ── */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <>
+            {/* Backdrop */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 0.6 }}
               exit={{ opacity: 0 }}
               onClick={() => setMobileMenuOpen(false)}
-              className="fixed inset-0 bg-black z-50 backdrop-blur-xs"
+              className="fixed inset-0 bg-black z-50"
             />
+            {/* Drawer */}
             <motion.div
               initial={{ x: '-100%' }}
               animate={{ x: 0 }}
@@ -98,11 +98,7 @@ export const Navbar: React.FC = () => {
             >
               <div>
                 <div className="flex justify-between items-center pb-6 border-b border-naxis-brown/10">
-                  <img
-                    src="/logo.png"
-                    alt="NAXIS"
-                    className="h-7 w-auto object-contain"
-                  />
+                  <img src="/logo.png" alt="NAXIS" className="h-7 w-auto object-contain" />
                   <button
                     onClick={() => setMobileMenuOpen(false)}
                     aria-label="Close menu"
@@ -112,65 +108,29 @@ export const Navbar: React.FC = () => {
                   </button>
                 </div>
 
-                <div className="mt-8 space-y-6 text-sm font-mono tracking-widest uppercase">
-                  <div>
-                    <Link
-                      href="/"
-                      onClick={() => setMobileMenuOpen(false)}
-                      className="block py-2 text-naxis-brown hover:text-naxis-gold transition-colors"
-                    >
-                      Home
-                    </Link>
-                  </div>
-                  <div>
-                    <Link
-                      href="/#capabilities"
-                      onClick={() => setMobileMenuOpen(false)}
-                      className="block py-2 text-naxis-brown hover:text-naxis-gold transition-colors"
-                    >
-                      Capabilities
-                    </Link>
-                  </div>
-                  <div>
-                    <Link
-                      href="/#global-network"
-                      onClick={() => setMobileMenuOpen(false)}
-                      className="block py-2 text-naxis-brown hover:text-naxis-gold transition-colors"
-                    >
-                      Global Network
-                    </Link>
-                  </div>
-                  <div>
-                    <Link
-                      href="/#certifications"
-                      onClick={() => setMobileMenuOpen(false)}
-                      className="block py-2 text-naxis-brown hover:text-naxis-gold transition-colors"
-                    >
-                      Certifications
-                    </Link>
-                  </div>
-                  <div>
-                    <Link
-                      href="/about"
-                      onClick={() => setMobileMenuOpen(false)}
-                      className="block py-2 text-naxis-brown hover:text-naxis-gold transition-colors"
-                    >
-                      About NAXIS
-                    </Link>
-                  </div>
-                  <div>
-                    <Link
-                      href="/#contact"
-                      onClick={() => setMobileMenuOpen(false)}
-                      className="block py-2 text-naxis-brown hover:text-naxis-gold transition-colors"
-                    >
-                      Contact
-                    </Link>
-                  </div>
-                </div>
+                <nav className="mt-8 space-y-5 text-sm font-mono tracking-widest uppercase">
+                  {[
+                    { label: 'Home', href: '/' },
+                    { label: 'Capabilities', href: '/#capabilities' },
+                    { label: 'Global Network', href: '/#global-network' },
+                    { label: 'Certifications', href: '/#certifications' },
+                    { label: 'About NAXIS', href: '/about' },
+                    { label: 'Contact', href: '/#contact' },
+                  ].map(({ label, href }) => (
+                    <div key={href}>
+                      <Link
+                        href={href}
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="block py-1.5 text-naxis-brown hover:text-naxis-gold transition-colors"
+                      >
+                        {label}
+                      </Link>
+                    </div>
+                  ))}
+                </nav>
               </div>
 
-              {/* Mobile Drawer Bottom Contact Actions */}
+              {/* Drawer Bottom Actions */}
               <div className="pt-6 border-t border-naxis-brown/10 space-y-3">
                 <a
                   href={`tel:${siteConfig.contact.phone}`}
