@@ -7,6 +7,7 @@ import { Footer } from '@/components/layout/Footer';
 import { Preloader } from '@/components/ui/Preloader';
 import { PageTransition } from '@/components/ui/PageTransition';
 import { SmoothScroll } from '@/components/ui/SmoothScroll';
+import { CustomCursor } from '@/components/ui/CustomCursor';
 
 export const metadata: Metadata = {
   title: {
@@ -47,6 +48,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body className="bg-cream-100 text-naxis-brown antialiased selection:bg-naxis-brown selection:text-naxis-gold-light min-h-screen flex flex-col justify-between">
+        <CustomCursor />
         <SmoothScroll>
           <Preloader />
           <Navbar />
