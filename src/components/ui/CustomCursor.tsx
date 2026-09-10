@@ -4,13 +4,14 @@ import React, { useRef, useEffect, useState } from 'react';
 import gsap from 'gsap';
 
 /**
- * CustomCursor — Yarnity-style magnetic cursor with NAXIS gold/brown palette.
+ * CustomCursor — Yarnity-style magnetic cursor with NAXIS gold palette.
  *
  * Two layers:
- *   1. Small dot (12px) — snaps to cursor position exactly
- *   2. Larger ring (44px) — lags behind with inertia for premium feel
+ *   1. Small dot (10px) — snaps to cursor position instantly
+ *   2. Larger ring (42px) — lags behind with smooth lerp inertia
  *
- * Changes to a gold-filled "Explore" label when hovering over the hero video.
+ * Automatically expands on interactive elements (links, buttons).
+ * Disabled on touch/mobile devices with coarse pointers.
  */
 export const CustomCursor: React.FC = () => {
   const dotRef = useRef<HTMLDivElement>(null);
@@ -18,14 +19,16 @@ export const CustomCursor: React.FC = () => {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    // Only run in browser
     if (typeof window === 'undefined') return;
+
+    // Disable on touch devices
+    if (window.matchMedia('(pointer: coarse)').matches) return;
 
     const dot = dotRef.current;
     const ring = ringRef.current;
     if (!dot || !ring) return;
 
-    // Hide default cursor globally
+    // Hide default cursor globally on fine pointer devices
     document.body.style.cursor = 'none';
 
     // Initial position off-screen
@@ -39,12 +42,13 @@ export const CustomCursor: React.FC = () => {
     const onMouseMove = (e: MouseEvent) => {
       mouseX = e.clientX;
       mouseY = e.clientY;
+      if (!visible) setVisible(true);
 
-      // Dot snaps instantly
+      // Dot snaps quickly
       gsap.to(dot, {
         x: mouseX,
         y: mouseY,
-        duration: 0.06,
+        duration: 0.05,
         ease: 'power2.out',
       });
     };
@@ -52,42 +56,39 @@ export const CustomCursor: React.FC = () => {
     const onMouseEnter = () => setVisible(true);
     const onMouseLeave = () => setVisible(false);
 
-    // Ring lags behind (inertia effect)
+    // Smooth inertia lag for outer ring
     const ticker = gsap.ticker.add(() => {
-      // Smooth lerp for ring
-      ringX += (mouseX - ringX) * 0.12;
-      ringY += (mouseY - ringY) * 0.12;
+      ringX += (mouseX - ringX) * 0.14;
+      ringY += (mouseY - ringY) * 0.14;
       gsap.set(ring, { x: ringX, y: ringY });
     });
 
-    // Hover states: scale ring up on links/buttons
-    const addHoverEffect = (el: Element) => {
-      el.addEventListener('mouseenter', () => {
-        gsap.to(ring, { scale: 1.7, duration: 0.3, ease: 'power2.out' });
-        gsap.to(dot, { scale: 0.4, duration: 0.3 });
-      });
-      el.addEventListener('mouseleave', () => {
-        gsap.to(ring, { scale: 1, duration: 0.3, ease: 'power2.out' });
-        gsap.to(dot, { scale: 1, duration: 0.3 });
-      });
+    // Delegation-based hover effect for all clickable items
+    const onMouseOver = (e: MouseEvent) => {
+      const target = (e.target as HTMLElement)?.closest('a, button, [role="button"], input, select, textarea');
+      if (target) {
+        gsap.to(ring, { scale: 1.6, borderColor: 'rgba(184, 145, 47, 0.9)', duration: 0.25, ease: 'power2.out' });
+        gsap.to(dot, { scale: 0.5, duration: 0.25 });
+      } else {
+        gsap.to(ring, { scale: 1, borderColor: 'rgba(184, 145, 47, 0.65)', duration: 0.25, ease: 'power2.out' });
+        gsap.to(dot, { scale: 1, duration: 0.25 });
+      }
     };
-
-    // Apply hover effect to interactive elements
-    const interactives = document.querySelectorAll('a, button, [role="button"]');
-    interactives.forEach(addHoverEffect);
 
     document.addEventListener('mousemove', onMouseMove, { passive: true });
     document.addEventListener('mouseenter', onMouseEnter);
     document.addEventListener('mouseleave', onMouseLeave);
+    document.addEventListener('mouseover', onMouseOver, { passive: true });
 
     return () => {
       document.body.style.cursor = '';
       document.removeEventListener('mousemove', onMouseMove);
       document.removeEventListener('mouseenter', onMouseEnter);
       document.removeEventListener('mouseleave', onMouseLeave);
+      document.removeEventListener('mouseover', onMouseOver);
       gsap.ticker.remove(ticker);
     };
-  }, []);
+  }, [visible]);
 
   return (
     <>
